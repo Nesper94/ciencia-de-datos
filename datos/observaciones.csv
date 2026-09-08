@@ -1,0 +1,12 @@
+id_observacion,id_especie,localidad,departamento,numero_individuos,año
+101,1,Puerto Carreño,Vichada,2,2023
+102,1,La Macarena,Meta,1,2024
+103,2,Leticia,Amazonas,4,2023
+104,3,Florencia,Caquetá,1,2022
+105,3,Mitu,Vaupés,2,2024
+106,4,Quibdó,Choco,5,2023
+107,5,Monteria,Córdoba,12,2024
+108,6,Cali,Valle del Cauca,8,2022
+109,7,Turbo,Antioquia,30,2023
+110,8,Quibdó,Choco,6,2024
+111,99,Medellín,Antioquia,1,2024

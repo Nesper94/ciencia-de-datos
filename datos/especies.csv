@@ -1,0 +1,11 @@
+id_especie,nombre_cientifico,nombre_comun,grupo,tamano_medio_cm
+1,Panthera onca,Jaguar,Mamífero,170
+2,Tapirus terrestris,Danta,Mamífero,220
+3,Harpia harpyja,Águila harpía,Ave,100
+4,Ateles fusciceps,Mono araña,Mamífero,50
+5,Iguana iguana,Iguana verde,Reptil,120
+6,Dendrobates truncatus,Rana venenosa,Anfibio,3
+7,Elaeis guineensis,Palma africana,Planta,1500
+8,Ceiba pentandra,Ceiba,Planta,4000
+9,Dermochelys coriaceae,Tortuga laúd,200
+10,Urania fulgens,Polilla cola de golondrina verde,5
