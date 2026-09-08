@@ -7,5 +7,5 @@ id_especie,nombre_cientifico,nombre_comun,grupo,tamano_medio_cm
 6,Dendrobates truncatus,Rana venenosa,Anfibio,3
 7,Elaeis guineensis,Palma africana,Planta,1500
 8,Ceiba pentandra,Ceiba,Planta,4000
-9,Dermochelys coriaceae,Tortuga laúd,200
-10,Urania fulgens,Polilla cola de golondrina verde,5
+9,Dermochelys coriaceae,Tortuga laúd,Reptil,200
+10,Urania fulgens,Polilla cola de golondrina verde,Insecto,5
