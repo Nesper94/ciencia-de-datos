@@ -7,8 +7,9 @@
 2. ¿Qué representa el error estándar de la media obtenido en el ejercicio
    anterior?
 
-3. ¿Cuánto debo aumentar el tamaño de una muestra para que el error estándar
-   disminuya a la mitad?
+3. Si estoy estudiando el tamaño de un grupo de polillas ¿Cuánto debo
+   aumentar el tamaño de una muestra para que el error estándar disminuya a
+   la mitad?
 
 4. ¿Qué es un intervalo de confianza?
 
