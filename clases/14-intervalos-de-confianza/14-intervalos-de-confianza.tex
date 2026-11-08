@@ -1,0 +1,831 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{jcar}
+
+%\includeonlyframes{a} % Para compilar solo en la que se está trabajando
+
+%================================================
+% PAQUETES
+%================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+
+\title{Intervalos de confianza}
+\author[Juan C. Arboleda Rivera]{Juan Camilo Arboleda Rivera}
+\institute[U. de A.]{Instituto de Biología\\
+  Facultad de Ciencias Exactas y Naturales\\
+  Universidad de Antioquia\\
+  juan.arboleda2@udea.edu.co}
+\date{v: \today}
+
+\begin{document}
+
+%------------------------------------------------
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+ \frametitle{Contenidos}
+ \tableofcontents
+\end{frame}
+
+%------------------------------------------------
+%\begin{frame}{Plan de trabajo: 120 minutos}
+%\begin{center}
+%\begin{tabular}{lc}
+%\toprule
+%\textbf{Tema} & \textbf{Duración}\\
+%\midrule
+%Motivación y conceptos fundamentales & 15 min\\
+%Variabilidad y error estándar & 20 min\\
+%Intervalos de confianza para una media & 25 min\\
+%Pausa y preguntas & 10 min\\
+%Ejemplos biológicos guiados & 20 min\\
+%Proporciones y comparación de grupos & 15 min\\
+%Ejercicios y evaluación final & 15 min\\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%\end{frame}
+
+%================================================
+% CONCEPTOS FUNDAMENTALES
+%================================================
+\section{Variabilidad y error estándar}
+
+\begin{frame}{Una pregunta biológica}
+Un equipo de ornitólogos desea conocer el peso promedio
+de los tucanes de una reserva natural.
+
+\begin{itemize}
+    \item La reserva contiene cientos de tucanes.
+    \item Pesar todos los individuos requiere mucho tiempo y esfuerzo de
+    muestreo.
+    \item Se seleccionan 15 tucanes para estudiarlos.
+    \item La media observada es de 125 gramos.
+\end{itemize}
+
+\begin{block}{Pregunta}
+¿La media de la muestra es exactamente igual a la
+media de todos los tucanes de la reserva?
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Población, muestra y parámetro}
+\begin{block}{Población}
+Todos los organismos o unidades que nos interesa estudiar.
+\end{block}
+
+\begin{block}{Muestra}
+Subconjunto de la población del que obtenemos datos.
+\end{block}
+
+\begin{block}{Parámetro}
+Cantidad que describe una característica poblacional,
+como la media $\mu$ o la proporción $p$.
+\end{block}
+
+\begin{block}{Estadístico}
+Cantidad calculada con los datos de la muestra,
+como la media $\bar{x}$ o la proporción $\hat{p}$.
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Ejemplos en Biología}
+\begin{center}
+\begin{tabular}{p{4cm}p{4cm}p{3cm}}
+\toprule
+\textbf{Pregunta} & \textbf{Parámetro} & \textbf{Estimador}\\
+\midrule
+Altura media de árboles & $\mu$ & $\bar{x}$\\
+Proporción de semillas germinadas & $p$ & $\hat{p}$\\
+Diferencia de crecimiento entre tratamientos
+& $\mu_1-\mu_2$ & $\bar{x}_1-\bar{x}_2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{alertblock}{Idea fundamental}
+Con frecuencia conocemos la muestra, pero queremos
+obtener información sobre una población más amplia.
+\end{alertblock}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{¿Por qué existe incertidumbre?}
+Imaginemos que tomamos varias muestras independientes
+de una misma población.
+
+\[
+\bar{x}_1,\quad \bar{x}_2,\quad \bar{x}_3,\quad
+\bar{x}_4,\quad \ldots
+\]
+
+Las medias muestrales generalmente serán diferentes.
+
+\begin{itemize}
+    \item Los organismos presentan variabilidad natural.
+    \item Cada muestra contiene individuos diferentes.
+    \item Una estimación puntual no describe por sí sola
+    toda la incertidumbre.
+\end{itemize}
+
+Por eso necesitamos herramientas que acompañen la
+estimación con una medida de precisión.
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Desviación estándar y error estándar}
+La desviación estándar muestral describe la dispersión
+de las observaciones individuales:
+
+\[
+s=\sqrt{\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}}
+\]
+
+El error estándar de la media ($ SE $, de Standard Error) estima la
+variabilidad de las medias muestrales:
+
+\[
+SE=\frac{s}{\sqrt{n}}
+\]
+
+Donde:
+\begin{itemize}
+    \item $s$: desviación estándar muestral.
+    \item $n$: tamaño de la muestra.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{¿Qué ocurre cuando aumenta el tamaño muestral?}
+Supongamos que la desviación estándar es de 20 gramos.
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Tamaño muestral & Cálculo & Error estándar\\
+\midrule
+25 & $20/\sqrt{25}$ & 4 g\\
+100 & $20/\sqrt{100}$ & 2 g\\
+400 & $20/\sqrt{400}$ & 1 g\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{block}{Conclusión}
+Si la variabilidad se mantiene, aumentar el tamaño
+de la muestra reduce el error estándar.
+\end{block}
+
+Una muestra mayor suele proporcionar estimaciones
+más precisas, siempre que el diseño del estudio sea adecuado.
+\end{frame}
+
+%================================================
+% INTERVALOS DE CONFIANZA
+%================================================
+\section{Intervalos de confianza}
+
+\begin{frame}{¿Qué es un intervalo de confianza?}
+
+Es un intervalo calculado a partir de una muestra
+mediante un procedimiento estadístico que tiene una
+determinada cobertura en muestreos repetidos.
+
+\[
+IC=\text{estimación}\pm\text{margen de error}
+\]
+
+El intervalo tiene dos límites:
+\begin{itemize}
+    \item Límite inferior.
+    \item Límite superior.
+\end{itemize}
+
+\begin{block}{Ejemplo}
+Un intervalo para la biomasa media podría ser
+$[118,132]$ gramos.
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{¿Qué significa un 95\% de confianza?}
+
+\begin{block}{Interpretación}
+Si repitiéramos el procedimiento de muestreo muchas
+veces y calculáramos un intervalo en cada repetición,
+aproximadamente el 95\% de los intervalos contendría
+el verdadero parámetro poblacional.
+\end{block}
+
+\vspace{1em}
+
+No significa que:
+\begin{itemize}
+    \item El 95\% de los datos esté dentro del intervalo.
+    \item El parámetro fijo tenga necesariamente una
+    probabilidad del 95\% de estar en el intervalo
+    particular que ya calculamos.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=.85\textheight]{confidence_interval.png}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+%[label=a]
+{Visualización de intervalos}
+\centering
+
+\begin{tikzpicture}[x=0.7cm,y=0.55cm]
+\draw[->] (0,0) -- (12,0) node[right] {Valor del parámetro};
+\draw[dashed,red,thick] (6,-0.3) -- (6,6.5);
+\foreach \y/\a/\b in {
+1/3/8,
+2/4/7,
+3/2/5,
+4/4/9,
+5/3/6.8,
+6/7/10
+}{
+\draw[thick,azul!50!black] (\a,\y)--(\b,\y);
+\draw[thick,azul!50!black] (\a,\y-0.12)--(\a,\y+0.12);
+\draw[thick,azul!50!black] (\b,\y-0.12)--(\b,\y+0.12);
+}
+\node[red,right] at (3.55,6.9) {\small Parámetro poblacional};
+\end{tikzpicture}
+
+\vspace{1em}
+Cada línea representa un intervalo de una muestra.
+Algunos intervalos pueden no contener el parámetro.
+El nivel de confianza describe la cobertura a largo plazo.
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[width=\linewidth]{NYW-confidence-interval.pdf}\\
+ La \textbf{media poblacional} ($ \mu $) estará dentro del intervalo de
+ confianza calculado a partir de una muestra en el 95\% de los casos
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=\textheight]{interpreting-confidence-intervals-correctly.jpg}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+%[label=a]
+{Intervalo de confianza del 95\% para una media}
+Cuando la desviación estándar poblacional es desconocida,
+o el tamaño de muestra es menor a 30, se utiliza habitualmente
+la distribución $t$ de Student.
+
+\[
+IC_{95\%}=
+\bar{x}\pm t_{0.975,n-1}\frac{s}{\sqrt{n}}
+\]
+
+Donde:
+\begin{itemize}
+    \item $\bar{x}$ es la media muestral.
+    \item $s$ es la desviación estándar muestral.
+    \item $n$ es el tamaño muestral.
+    \item $t_{0.975,n-1}$ es el valor crítico de Student. También se usa
+    $t_{0.025,n-1}$.
+\end{itemize}
+
+Para muestras pequeñas, es importante examinar si
+los datos son aproximadamente normales y si existen
+valores atípicos extremos.
+\end{frame}
+
+%----- Distribución t de Student --------------
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=\textheight]{t-student-ic.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=.95\textheight]{interval-of-confidence-t-dsitribution-graph.png}
+\end{frame}
+
+\section{Ejemplos}
+
+%------------------------------------------------
+\begin{frame}
+%[label=a]
+{Ejemplo: biomasa de plantas}
+Se seleccionan 25 plantas y se obtiene:
+
+\begin{itemize}
+    \item Media: $\bar{x}=120$ g.
+    \item Desviación estándar: $s=20$ g.
+    \item Tamaño muestral: $n=25$.
+    \item Valor crítico: $t_{0.975,24}=2.064$.
+\end{itemize}
+
+Primero calculamos el error estándar:
+
+\[
+SE=\frac{20}{\sqrt{25}}=4\text{ g}
+\]
+
+Después calculamos el margen de error:
+
+\[
+ME=2.064(4)=8.256\text{ g}
+\]
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Resultado del intervalo}
+\[
+IC_{95\%}=120\pm8.256
+\]
+
+Por tanto:
+
+\[
+\boxed{IC_{95\%}=[111.74,\;128.26]\text{ g}}
+\]
+
+\begin{block}{Interpretación biológica}
+El intervalo calculado para la media poblacional
+de biomasa va aproximadamente de 111.74 a 128.26 g,
+bajo los supuestos del método.
+\end{block}
+
+\begin{alertblock}{Pregunta}
+¿Significa esto que el 95\% de las plantas pesa
+entre 111.74 y 128.26 gramos?
+\end{alertblock}
+
+\pause
+No. El intervalo estima la media poblacional, no
+la distribución de los pesos individuales.
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+%[label=a]
+{Factores que afectan el intervalo}
+
+La amplitud de un intervalo depende de:
+
+\begin{enumerate}[<+->] \itemsep 0.5em
+    \item \textbf{Variabilidad:} una desviación estándar
+    mayor generalmente produce intervalos más anchos.
+    \item \textbf{Tamaño muestral:} una muestra mayor
+    generalmente reduce la amplitud.
+    \item \textbf{Nivel de confianza:} un nivel más alto
+    requiere normalmente un intervalo más ancho.
+\end{enumerate}
+
+\onslide<4->{
+ \begin{block}{Pregunta de discusión}
+ ¿Cómo podríamos obtener una estimación más precisa
+ de la biomasa de una especie?
+ \end{block}
+}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+%[label=a]
+{Ejemplo}{}
+ \centering
+ \includegraphics[height=.85\textheight]{smith-et-al-2016.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \footnotesize
+ \includegraphics[height=.8\textheight]{icad70149-fig-0002-m.jpg}\\
+ Respuesta de (a) la riqueza de especies y (b) la abundancia total al uso de
+ tierra e intensidad del uso de tierra. Las barras de error corresponden a
+ intervalos de confianza del 95\%.
+ \blfootnote{Smith, K. N. et al. Interactions of land use and climate change
+ disproportionately impact Lepidoptera of the five major insect orders.
+ Insect Conservation and Diversity n/a,.
+ }
+\end{frame}
+
+%================================================
+% PROPORCIONES
+%================================================
+
+%\begin{frame}{Intervalo de confianza para una proporción}
+%Un equipo evalúa la germinación de 100 semillas.
+%Germinan 70 semillas.
+%
+%La proporción observada es:
+%
+%\[
+%\hat{p}=\frac{70}{100}=0.70
+%\]
+%
+%Una aproximación normal al intervalo del 95\% es:
+%
+%\[
+%\hat{p}\pm1.96
+%\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+%\]
+%
+%Calculamos el error estándar:
+%
+%\[
+%EE=\sqrt{\frac{0.70(0.30)}{100}}
+%\approx0.0458
+%\]
+%
+%Entonces:
+%
+%\[
+%IC_{95\%}\approx0.70\pm1.96(0.0458)
+%\]
+%
+%\[
+%\boxed{IC_{95\%}\approx[0.610,0.790]}
+%\]
+%
+%El intervalo corresponde aproximadamente a una
+%proporción entre 61\% y 79\%.
+%\end{frame}
+
+%------------------------------------------------
+%\begin{frame}{Comparación de dos tratamientos}
+%Un experimento compara el crecimiento vegetal.
+%
+%\begin{center}
+%\begin{tabular}{lcc}
+%\toprule
+% & Control & Fertilizante\\
+%\midrule
+%Media & 12 cm & 16 cm\\
+%Desviación estándar & 4 cm & 5 cm\\
+%Tamaño muestral & 25 & 25\\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%
+%Diferencia entre las medias:
+%
+%\[
+%\bar{x}_2-\bar{x}_1=16-12=4\text{ cm}
+%\]
+%
+%Error estándar estimado de la diferencia:
+%
+%\[
+%EE=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+%\]
+%
+%\[
+%EE=\sqrt{\frac{16}{25}+\frac{25}{25}}
+%=\sqrt{1.64}\approx1.28
+%\]
+%\end{frame}
+%
+%%------------------------------------------------
+%\begin{frame}{Intervalo para la diferencia de medias}
+%Con una aproximación de Welch, el valor crítico
+%para un intervalo del 95\% es aproximadamente 2.01.
+%
+%\[
+%IC_{95\%}\approx4\pm2.01(1.28)
+%\]
+%
+%\[
+%\boxed{IC_{95\%}\approx[1.43,\;6.57]\text{ cm}}
+%\]
+%
+%\begin{block}{Interpretación}
+%Los datos son compatibles con un mayor crecimiento
+%medio en el grupo fertilizado que en el grupo control.
+%\end{block}
+%
+%La interpretación depende de los supuestos estadísticos
+%y del diseño experimental. Un intervalo que no incluye
+%cero sugiere una diferencia estadísticamente detectable,
+%pero no demuestra por sí solo causalidad ni relevancia
+%biológica.
+%\end{frame}
+
+%================================================
+% ACTIVIDAD
+%================================================
+
+\section{Ejercicios}
+
+\begin{frame}{Ejercicio 1}
+Un grupo mide el diámetro de 25 árboles.
+
+Datos:
+\begin{itemize}
+    \item Media muestral: 18 cm.
+    \item Desviación estándar: 5 cm.
+%    \item Valor crítico aproximado: $t^*=2.03$.
+\end{itemize}
+
+Resuelvan:
+\begin{enumerate}
+    \item Calculen el error estándar.
+    \item Calculen el margen de error.
+    \item Obtengan el intervalo del 95\%.
+    \item Interpreten el resultado biológicamente.
+    \item Expliquen qué ocurriría si la muestra tuviera
+    144 árboles y la misma desviación estándar.
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Solución de la actividad}
+Primero calculamos el Error estándar:
+\vspace{-.2em}
+\[
+SE=\frac{5}{\sqrt{25}}=1\text{ cm}
+\]
+
+Calculamos el Margen de error:
+\vspace{-.2em}
+\[
+ME=2.064(1)=2.064\text{ cm}
+\]
+
+Intervalo:
+\vspace{-.2em}
+\[
+IC_{95\%}=18\pm2.064
+\]
+\vspace{-.2em}
+\[
+\boxed{IC_{95\%}=[15.936,\;20.064]\text{ cm}}
+\]
+
+\begin{block}{Interpretación}
+El intervalo estima la media poblacional del diámetro
+entre aproximadamente 15.936 y 20.064 cm.
+\end{block}
+\end{frame}
+
+%================================================
+% EJERCICIO 2
+%================================================
+
+\begin{frame}{Ejercicio 2. Longitud de peces}
+Un equipo de ecólogos estudia la longitud de una especie
+de pez en un río de una región tropical.
+
+Se selecciona una muestra aleatoria de 16 peces y se
+obtienen los siguientes datos:
+
+\begin{itemize}
+    \item Longitud media muestral: $\bar{x}=12.4$ cm.
+    \item Desviación estándar muestral: $s=2.0$ cm.
+\end{itemize}
+
+La desviación estándar poblacional es desconocida.
+
+\medskip
+\begin{alertblock}{}
+    Calcule el intervalo de confianza del 95\% para
+    la longitud media poblacional.
+\end{alertblock}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Ejercicio 2. Solución}
+Como la desviación estándar poblacional es desconocida,
+utilizamos la distribución $t$ de Student.
+\vspace{-.2em}
+\[
+IC_{95\%}=\bar{x}\pm t_{\alpha/2,n-1}
+\frac{s}{\sqrt{n}}
+\]
+
+Los grados de libertad son:
+\vspace{-.2em}
+\[
+gl=n-1=16-1=15
+\]
+
+Para un nivel de confianza del 95\%:
+\[
+t_{0.025,15}\approx2.131
+\]
+
+Sustituyendo:
+\[
+IC_{95\%}=12.4\pm2.131\frac{2.0}{\sqrt{16}}
+\]
+
+Por tanto:
+\[
+IC_{95\%}=(12.4-1.0655,\;12.4+1.0655)
+\]
+\vspace{-1em}
+\[
+\boxed{IC_{95\%}=(11.33,\;13.47)\text{ cm}}
+\]
+\end{frame}
+
+%----------------------
+% EJERCICIO 3
+%----------------------
+
+\begin{frame}{Ejercicio 3. Longitud de insectos}
+Un grupo de entomólogos estudia la longitud corporal de una
+especie de escarabajo en un bosque tropical.
+
+Se selecciona una muestra aleatoria de 12 escarabajos y se
+obtienen los siguientes resultados:
+
+\begin{itemize}
+    \item Longitud media muestral: $\bar{x}=18.6$ mm.
+    \item Desviación estándar muestral: $s=2.4$ mm.
+\end{itemize}
+
+\medskip
+\textbf{Preguntas:}
+\begin{enumerate}
+    \item Calcule el intervalo de confianza del 95\% para
+    la longitud media poblacional utilizando la distribución
+    $t$ de Student.
+    \item Determine los grados de libertad y el valor crítico
+    correspondiente.
+    \item Interprete el intervalo obtenido en el contexto
+    del estudio entomológico.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Ejercicio 3. Solución: longitud de insectos}
+Como la desviación estándar poblacional es desconocida,
+utilizamos la distribución $t$ de Student.
+
+La fórmula del intervalo de confianza es:
+
+\[
+IC_{95\%}=\bar{x}\pm t_{\alpha/2,n-1}
+\frac{s}{\sqrt{n}}
+\]
+
+\textbf{Paso 1. Identificar los datos}
+
+\[
+n=12,\qquad \bar{x}=18.6,\qquad s=2.4
+\]
+
+\textbf{Paso 2. Calcular los grados de libertad}
+
+\[
+gl=n-1=12-1=11
+\]
+\end{frame}
+
+\begin{frame}{Ejercicio 3. Solución: longitud de insectos}
+
+Para un nivel de confianza del 95\%:
+\[
+\alpha=0.05,\qquad t_{0.025,11}=2.201
+\]
+
+\textbf{Paso 3. Calcular el margen de error}
+
+\[
+ME=2.201\frac{2.4}{\sqrt{12}}\approx1.525
+\]
+
+\end{frame}
+
+\begin{frame}{Ejercicio 3. Solución e interpretación}
+\textbf{Paso 4. Calcular el intervalo de confianza}
+
+\[
+IC_{95\%}=18.6\pm2.201\frac{2.4}{\sqrt{12}}
+\]
+
+\[
+IC_{95\%}=18.6\pm1.525
+\]
+
+Por tanto:
+
+\[
+IC_{95\%}=(18.6-1.525,\;18.6+1.525)
+\]
+
+\[
+\boxed{IC_{95\%}=[17.08,\;20.13]\text{ mm}}
+\]
+\end{frame}
+
+\begin{frame}{Ejercicio 3. Solución e interpretación}
+\medskip
+\textbf{Interpretación biológica}\\~\\
+
+Con un nivel de confianza del 95\%, estimamos que la
+longitud media poblacional de esta especie de escarabajo
+se encuentra entre 17.08 mm y 20.13 mm.
+
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+%[label=a]
+{Errores frecuentes}
+
+\begin{itemize} \itemsep 1em
+    \item Interpretar el intervalo como un rango que
+    contiene al 95\% de los organismos.
+    \item Pensar que una muestra grande elimina todos
+    los posibles sesgos.
+    \item Suponer que un intervalo estrecho implica
+    que el resultado es biológicamente importante.
+\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Revisión de conceptos}
+
+\begin{enumerate}[<+->] \itemsep 1em
+    \item ¿Qué diferencia existe entre parámetro
+    y estadístico?
+    \item ¿Qué ocurre con el error estándar cuando
+    aumenta el tamaño muestral?
+    \item ¿Un intervalo estrecho garantiza que no
+    existe sesgo?
+    \item ¿Por qué es importante reportar intervalos
+    de confianza en estudios biológicos?
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Conclusiones}
+\begin{itemize} \itemsep .5em
+    \item La investigación biológica suele utilizar
+    muestras para estudiar poblaciones.
+    \item Toda estimación muestral tiene incertidumbre.
+    \item El intervalo combina una estimación con
+    un margen de error.
+    \item El ancho depende de la variabilidad, el tamaño
+    de la muestra y el nivel de confianza.
+    \item La interpretación estadística debe acompañarse
+    de una evaluación de la importancia biológica.
+\end{itemize}
+
+\vspace{0.5cm}
+\begin{center}
+\Large ¿Preguntas?
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}{Referencias}
+\small
+\begin{thebibliography}{9}
+
+\bibitem{motulsky}
+Motulsky, H. (2014).
+\textit{Intuitive Biostatistics}.
+Oxford University Press.
+
+\bibitem{quinn}
+Quinn, G. P. y Keough, M. J. (2002).
+\textit{Experimental Design and Data Analysis for Biologists}.
+Cambridge University Press.
+
+\bibitem{zar}
+Zar, J. H. (2010).
+\textit{Biostatistical Analysis}.
+Pearson.
+
+\end{thebibliography}
+\end{frame}
+
+\end{document}

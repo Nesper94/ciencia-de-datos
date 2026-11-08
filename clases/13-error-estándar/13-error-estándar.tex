@@ -1,0 +1,141 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage[style=authoryear-icomp, backend=biber]{biblatex}
+\usetheme{jcar}
+
+%\includeonlyframes{a} % Para compilar solo en la que se está trabajando
+
+\newcommand\blfootnotee[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\begin{document}
+\author[Juan C. Arboleda Rivera]{Juan Camilo Arboleda Rivera}
+\title{Error estándar}
+%\subtitle{}
+%\titlegraphic{\includegraphics[width=2cm]{udea}}
+\institute[U. de A.]{Instituto de Biología\\
+  Facultad de Ciencias Exactas y Naturales\\
+  Universidad de Antioquia\\
+  juan.arboleda2@udea.edu.co}
+\date{v: \today}
+%\subject{}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\begin{frame}
+ \frametitle{Contenidos}
+ \tableofcontents
+\end{frame}
+
+\section{Práctica Colab}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \LARGE
+%
+\href{https://colab.research.google.com/github/Nesper94/ciencia-de-datos/blob/main/notebooks/lec13-error-estándar.ipynb}
+{\color{blue} Notebook Error Estándar}
+\end{frame}
+
+
+\section{¿Qué es el Error estándar?}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+
+ \textbf{Error estándar}\\~\\
+
+ El \textbf{error estándar} (SE por Standard Error) es la desviación
+ estándar de la distribución muestral de un estadístico muestral, por
+ ejemplo la media\\~\\
+
+ El error estándar de la media sería la desviación estándar que tienen las
+ medias muestrales tomadas de una población
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Cálculo del Error estándar de la media}{}
+ \centering \large
+
+ \textbf{\large Valor exacto}
+
+ $$ \sigma_{\bar{x}} = \dfrac{\sigma}{\sqrt{n}}, $$
+
+ donde $ \sigma $ es la desviación estándar \textbf{poblacional}, y $ n $ el
+ tamaño de la muestra.\\~\\
+
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Cálculo del Error estándar}{}
+ \centering \large
+  \textbf{\large Estimación}\\~\\
+
+  Como normalmente desconocemos $ \sigma $, se puede estimar el error
+  estándar así:
+
+  $$ \sigma_{\bar{x}} \approx \dfrac{s}{\sqrt{n}}, $$
+
+  donde $ s $ es la desviación estándar \textbf{muestral}.
+\end{frame}
+
+\section{Ejercicios}
+
+\begin{frame}
+%[label=a]
+{Crecimiento de plántulas}{}
+ \centering \large
+
+ Un estudiante mide la altura de 25 plántulas de caoba (\textit{Swietenia
+ macrophylla}). Encuentra que el promedio de las alturas es 40 cm y la
+ desviación estándar es de 5 cm\\~\\
+
+ Calcula el error estándar de la media
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Masa de peces}{}
+ \centering \large
+
+ En una investigación sobre peces de agua dulce se pesan 36 individuos,
+ dando un valor promedio de 90 g. La desviación estándar de la masa es de 12
+ g\\~\\
+
+ Calcula el error estándar de la media
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Frecuencia cardíaca en animales}{}
+ \centering \large
+
+ Un grupo de estudiantes registra la frecuencia cardíaca de ocho individuos
+ de una especie, en condiciones experimentales controladas. Obtienen una
+ media de 120 latidos/min y una desviación estándar de 8 latidos/min.\\~\\
+
+ Responde:
+
+ \begin{enumerate}
+
+ \item ¿Cuál es el error estándar?
+
+ \item ¿Qué representa este valor en el estudio?
+
+ \item Si se aumenta la muestra a 32 individuos y la desviación estándar
+ permanece en 8 latidos/min, ¿cuál sería el nuevo error estándar?
+ \end{enumerate}
+
+\end{frame}
+
+\end{document}
