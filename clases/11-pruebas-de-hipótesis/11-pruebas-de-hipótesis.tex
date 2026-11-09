@@ -1,0 +1,1054 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage[style=authoryear-icomp, backend=biber]{biblatex}
+\usetheme{jcar}
+\usepackage{booktabs}
+
+%\includeonlyframes{a} % Para compilar solo en la que se está trabajando
+
+%\addbibresource{refs.bib}
+
+\begin{document}
+\author[Juan C. Arboleda Rivera]{Juan Camilo Arboleda Rivera}
+\title{Pruebas de hipótesis}
+%\subtitle{}
+%\titlegraphic{\includegraphics[width=2cm]{udea}}
+\institute[U. de A.]{Instituto de Biología\\
+  Facultad de Ciencias Exactas y Naturales\\
+  Universidad de Antioquia\\
+  juan.arboleda2@udea.edu.co}
+\date{v: \today}
+%\subject{}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\begin{frame}
+ \frametitle{Contenidos}
+ \tableofcontents
+\end{frame}
+
+\section{Introducción}
+
+\begin{frame}{¿Por qué necesitamos pruebas de hipótesis?}
+
+Supongamos que estudiamos una especie de planta.
+
+\begin{block}{Pregunta biológica}
+¿La aplicación de un fertilizante aumenta el crecimiento de las plantas?
+\end{block}
+
+Observamos:
+\vspace{-1em}
+\[
+\bar{x}_{fertilizante}=18.4\text{ cm}
+\]
+\vspace{-1em}
+\[
+\bar{x}_{control}=16.9\text{ cm}
+\]
+
+Hay una diferencia de:
+
+\[
+18.4-16.9=1.5\text{ cm}
+\]
+
+\pause
+
+Pero...
+
+\begin{alertblock}{Pregunta estadística}
+¿Una diferencia de 1.5 cm es suficientemente grande como para ser difícil
+de explicar por variación aleatoria?
+\end{alertblock}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Variabilidad: una característica de los datos biológicos}
+
+La biología presenta variabilidad debido a:
+
+\begin{itemize}[<+->]
+    \item Diferencias genéticas
+    \item Edad y estado fisiológico
+    \item Ambiente
+    \item Error de medición
+    \item Heterogeneidad espacial
+    \item Variación temporal
+    \item Factores no controlados
+\end{itemize}
+
+\vspace{0.3cm}
+
+Por eso:
+
+\vspace{-.5em}
+
+\[
+\text{diferencia observada}
+=
+\text{señal}
++
+\text{variación}
+\]
+
+\pause
+
+La estadística intenta cuantificar cuánto de la diferencia observada
+es compatible con la variabilidad esperada.
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{La lógica de una prueba de hipótesis}
+
+\begin{enumerate}[<+->]
+    \item Planteamos una hipótesis sobre la población.
+    \item Recolectamos una muestra.
+    \item Calculamos un estadístico (un número del cual se conoce su
+    \emph{distribución} y que me permite estimar la probabilidad de obtener
+    un determinado resultado por azar).
+    \item Determinamos qué tan compatible es el estadístico con una
+    hipótesis nula ($H_0$).
+    \item Tomamos una decisión basada en una regla previamente definida.
+\end{enumerate}
+
+\vspace{0.4cm}
+
+\begin{center}
+\Large
+\[
+\boxed{
+H_0
+\longrightarrow
+\text{datos}
+\longrightarrow
+\text{estadístico}
+\longrightarrow
+p
+}
+\]
+\end{center}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Hipótesis nula y alternativa}
+
+\begin{block}{Hipótesis nula ($H_0$)}
+Representa generalmente una ausencia de diferencia, asociación o efecto
+bajo el modelo planteado.
+\end{block}
+
+\begin{block}{Hipótesis alternativa ($H_1$ o $H_A$)}
+Representa el patrón que queremos evaluar como evidencia frente a $H_0$.
+\end{block}
+
+\vspace{0.3cm}
+
+Ejemplo:
+
+\[
+H_0:\mu_{fert}=\mu_{control}
+\]
+
+\[
+H_A:\mu_{fert}\neq\mu_{control}
+\]
+
+\end{frame}
+
+% ------------------------------------------------------------
+%\begin{frame}{Hipótesis unilaterales y bilaterales}
+%
+%%### Bilateral
+%\vspace{-1em}
+%\[
+%H_A:\mu\neq\mu_0
+%\]
+%
+%Pregunta:
+%
+%\begin{quote}
+%¿La media es diferente?
+%\end{quote}
+%
+%%### Unilateral
+%
+%\[
+%H_A:\mu>\mu_0
+%\]
+%
+%Pregunta:
+%
+%\begin{quote}
+%¿La media es mayor?
+%\end{quote}
+%
+%También:
+%\vspace{-1em}
+%\[
+%H_A:\mu<\mu_0
+%\]
+%
+%\begin{alertblock}{Importante}
+%La dirección de la hipótesis debe estar justificada por la pregunta
+%científica
+%y definida antes de observar los resultados.
+%\end{alertblock}
+%
+%\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo: efecto de un contaminante}
+
+Queremos estudiar si una exposición a un contaminante afecta
+la tasa fotosintética.
+
+Variable:
+
+\[
+Y = \text{tasa fotosintética}
+\]
+
+Pregunta:
+
+\begin{quote}
+¿Las plantas expuestas presentan una tasa fotosintética diferente
+a las plantas control?
+\end{quote}
+
+Entonces:
+
+\[
+H_0:\mu_E=\mu_C
+\]
+
+\[
+H_A:\mu_E\neq\mu_C
+\]
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}
+%[label=a]
+{La hipótesis biológica vs. Hipótesis estadística}
+
+\centering
+
+La hipótesis biológica está relacionada con la hipótesis estadística pero
+\textbf{NO} son iguales.\\
+Cada prueba estadística tiene su Hipótesis nula
+definida.
+
+\pause
+
+\begin{center}
+\begin{tabular}{p{0.65\textwidth} p{0.3\textwidth}}
+\toprule
+\textbf{Pregunta biológica} & \textbf{Hipótesis estadística}\\
+\midrule
+¿Determinado tratamiento cambia el peso de un insecto? &
+$\mu_T \neq \mu_C$\\[0.2cm]
+
+¿El fertilizante aumenta el crecimiento? &
+$\mu_F > \mu_C$\\[0.2cm]
+
+¿Dos hábitats tienen distinta abundancia? &
+$\mu_1 \neq \mu_2$\\[0.2cm]
+
+¿La temperatura está asociada con el número de huevos? &
+$\rho \neq 0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+\section{Estadístico de prueba}
+
+% ------------------------------------------------------------
+\begin{frame}{El estadístico de prueba}
+
+Una prueba transforma los datos en un número que mide la discrepancia
+entre lo observado y lo esperado bajo $H_0$.
+
+Ejemplo: prueba $t$
+
+\[
+t=
+\frac{\bar{x}-\mu_0}
+{s/\sqrt{n}}
+\]
+
+donde:
+
+\begin{itemize}
+    \item $\bar{x}$ = media observada,
+    \item $\mu_0$ = media bajo $H_0$,
+    \item $s$ = desviación estándar,
+    \item $n$ = tamaño de muestra.
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{¿Qué significa el estadístico?}
+
+Supongamos:
+
+\[
+\bar{x}=12.4
+\]
+\vspace{-.5em}
+\[
+\mu_0=10
+\]
+\vspace{-.5em}
+\[
+s=4
+\]
+
+\[
+n=16
+\]
+
+Entonces:
+
+\[
+t=
+\frac{12.4-10}{4/\sqrt{16}}
+=
+\frac{2.4}{1}
+=
+2.4
+\]
+
+La diferencia observada equivale a aproximadamente
+$2.4$ errores estándar respecto al valor planteado por $H_0$.
+
+\end{frame}
+
+\begin{frame}
+[label=a]
+{La distribución del estadístico de prueba es conocida}{}
+ \centering
+ \textbf{Ejemplo:}\\
+ La distribución t de Student\\
+ \includegraphics[width=.8\linewidth]{t-de-Student.png}
+\end{frame}
+
+\begin{frame}
+[label=a]
+{}{}
+ \centering
+ \includegraphics[width=\linewidth]{t-de-Student.jpg}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{¿Qué es el valor-$p$?}
+
+El valor-$p$ responde a una pregunta específica:
+
+\begin{block}{}
+Si $H_0$ fuera cierta y el modelo estadístico fuera apropiado,
+¿qué tan compatible sería observar un resultado como el obtenido
+(o más extremo)?
+\end{block}
+
+\vspace{0.4cm}
+
+Un valor-$p$ pequeño indica que los datos son poco compatibles con
+$H_0$ bajo el modelo utilizado.
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Lo que un valor-$p$ NO significa}
+
+Si:
+
+\[
+p=0.03
+\]
+
+\textbf{NO significa:}
+
+\begin{itemize}
+    \item ``Hay 3\% de probabilidad de que $H_0$ sea cierta''.
+    \item ``Hay 97\% de probabilidad de que $H_A$ sea cierta''.
+    \item ``El efecto es grande''.
+    \item ``El resultado es biológicamente importante''.
+    \item ``El experimento está probado''.
+\end{itemize}
+
+\pause
+
+\begin{alertblock}{Recordatorio}
+El valor-$p$ se calcula suponiendo un modelo bajo $H_0$.
+No es una probabilidad de que una hipótesis sea verdadera.
+\end{alertblock}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Nivel de significancia $\alpha$}
+
+Antes de analizar los resultados podemos definir:
+
+\[
+\alpha=0.05
+\]
+
+Regla convencional:
+
+\[
+p<\alpha
+\quad\Rightarrow\quad
+\text{rechazar }H_0
+\]
+
+\[
+p\geq\alpha
+\quad\Rightarrow\quad
+\text{no rechazar }H_0
+\]
+
+\begin{alertblock}{Lenguaje importante}
+``No rechazar $H_0$'' no significa ``demostrar que $H_0$ es verdadera''.
+\end{alertblock}
+
+\end{frame}
+
+\section{Errores tipo I y tipo II}
+
+% ------------------------------------------------------------
+\begin{frame}{Errores tipo I y tipo II}
+
+Tenemos dos posibles errores:
+
+\begin{center}
+\begin{tabular}{c|cc}
+& $H_0$ verdadera & $H_0$ falsa\\
+\hline
+Rechazar $H_0$ &
+\textbf{Error tipo I} &
+Decisión correcta\\
+No rechazar $H_0$ &
+Decisión correcta &
+\textbf{Error tipo II}
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\[
+P(\text{Error tipo I})=\alpha
+\]
+
+\[
+P(\text{Error tipo II})=\beta
+\]
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo biológico: falso positivo}
+
+Supongamos que evaluamos un nuevo tratamiento contra una enfermedad vegetal.
+
+\[
+H_0:\text{el tratamiento no tiene efecto}
+\]
+
+Un error tipo I ocurre si:
+
+\[
+\text{rechazamos }H_0
+\]
+
+cuando realmente el tratamiento no tiene efecto.
+
+\begin{block}{Interpretación}
+Concluir que existe un efecto cuando, bajo el modelo, realmente
+no existe.
+\end{block}
+
+\end{frame}
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo biológico: falso negativo}
+
+Ahora supongamos que el tratamiento realmente funciona.
+
+Pero nuestro estudio no encuentra evidencia suficiente para rechazar $H_0$.
+
+Esto corresponde a un:
+
+\[
+\boxed{\text{Error tipo II}}
+\]
+
+Puede ocurrir cuando:
+
+\begin{itemize}
+    \item $n$ es pequeño,
+    \item existe mucha variabilidad,
+    \item el efecto es pequeño,
+    \item las mediciones son poco precisas.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=\textheight]{type-i-and-type-ii-errors.jpg}
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Potencia estadística}
+
+La potencia es:
+
+\[
+\boxed{\text{Potencia}=1-\beta}
+\]
+
+Representa la probabilidad de detectar un efecto de una magnitud
+determinada cuando ese efecto realmente existe, bajo las condiciones
+del diseño y del análisis.
+
+La potencia aumenta generalmente con:
+
+\begin{itemize}
+    \item mayor tamaño de muestra,
+    \item mayor tamaño del efecto,
+    \item menor variabilidad,
+    \item mediciones más precisas.
+\end{itemize}
+
+\end{frame}
+
+
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo conceptual de potencia}
+
+Supongamos que queremos detectar una diferencia de:
+
+\[
+\Delta=2\text{ cm}
+\]
+
+entre dos tratamientos.
+
+\begin{itemize}
+    \item Con $n=5$ por grupo puede ser difícil.
+    \item Con $n=20$ por grupo tenemos más información.
+    \item Con $n=100$ por grupo podemos detectar diferencias pequeñas.
+\end{itemize}
+
+\begin{alertblock}{Idea clave}
+Un resultado no significativo puede deberse a ausencia de efecto,
+pero también a un estudio con poca capacidad para detectarlo.
+\end{alertblock}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Tamaño del efecto}
+
+La significancia estadística no mide directamente la magnitud del efecto.
+
+Ejemplo:
+
+\[
+\Delta = 0.2\text{ cm}
+\]
+
+puede ser estadísticamente significativo con una muestra enorme.
+
+Mientras que:
+
+\[
+\Delta = 5\text{ cm}
+\]
+
+puede no ser significativo con una muestra muy pequeña.
+
+\begin{block}{En biología}
+Debemos reportar tanto la evidencia estadística como la magnitud
+y la incertidumbre del efecto.
+\end{block}
+
+\end{frame}
+
+\section{Ejemplos de pruebas estadísticas}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo 1: una muestra}
+
+Pregunta:
+
+\begin{quote}
+¿La longitud promedio de las hojas de una población es diferente
+de 10 cm?
+\end{quote}
+
+Hipótesis:
+
+\[
+H_0:\mu=10
+\]
+
+\[
+H_A:\mu\neq10
+\]
+
+Si las condiciones son razonables:
+
+\[
+\text{prueba }t\text{ de una muestra}
+\]
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo 2: dos grupos independientes}
+
+Tenemos dos grupos:
+
+\begin{itemize}
+    \item Plantas control.
+    \item Plantas tratadas.
+\end{itemize}
+
+Variable respuesta:
+
+\[
+Y=\text{biomasa seca}
+\]
+
+Pregunta:
+
+\[
+\mu_T-\mu_C\neq0?
+\]
+
+Una opción frecuente:
+
+\[
+\boxed{\text{prueba }t\text{ para dos muestras}}
+\]
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Prueba $t$: idea intuitiva}
+
+La prueba compara:
+
+\[
+\text{diferencia entre medias}
+\]
+
+con:
+
+\[
+\text{variabilidad esperada de esa diferencia}
+\]
+
+En términos intuitivos:
+
+\[
+t=
+\frac{\text{señal}}
+{\text{ruido}}
+\]
+
+\pause
+
+Cuanto mayor sea la diferencia respecto a su incertidumbre,
+más evidencia puede existir contra $H_0$.
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo 3: datos pareados}
+
+Medimos la presión arterial de animales:
+
+\[
+\text{Antes}
+\qquad\text{y}\qquad
+\text{Después}
+\]
+
+Los datos están relacionados porque:
+\vspace{-.5em}
+\[
+\boxed{\text{cada animal aporta dos mediciones}}
+\]
+
+Podemos trabajar con las diferencias:
+
+\[
+D_i=Después_i-Antes_i
+\]
+
+y probar:
+
+\[
+H_0:\mu_D=0
+\]
+
+Se usa:
+\[
+\boxed{\text{prueba }t\text{ pareada}}
+\]
+
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejemplo 4: más de dos grupos}
+
+Queremos comparar la biomasa de plantas bajo:
+
+\begin{itemize}
+    \item Control
+    \item Fertilizante A
+    \item Fertilizante B
+    \item Fertilizante C
+\end{itemize}
+
+Una prueba ANOVA puede evaluar:
+
+\[
+H_0:
+\mu_C=\mu_A=\mu_B=\mu_C
+\]
+
+frente a:
+
+\[
+H_A:\text{al menos una media difiere}
+\]
+
+\end{frame}
+
+%\appendix
+%\AtNextBibliography{\footnotesize}
+%\begin{frame}[plain, allowframebreaks]{Bibliografía}{}
+% \bibitemsep 1em
+% \printbibliography[heading=none]
+%\end{frame}
+\end{document}
+
+%%%%%%%
+Ejemplos:
+
+Pregunta biológica: ¿un fertilizante aumenta el crecimiento de las plantas?
+
+Se puede proporcionar a cada estudiante una muestra simulada:
+
+Planteamiento:
+
+    H0:μfertilizante−μcontrol=0
+
+    H1:μfertilizante−μcontrol≠0
+
+Simulación
+
+En lugar de comenzar con una prueba t, los estudiantes pueden:
+
+1. Calcular la diferencia observada entre los grupos.
+2. Mezclar todas las observaciones.
+3. Redistribuir aleatoriamente las plantas entre dos grupos.
+4. Calcular nuevamente la diferencia.
+5. Repetir 1.000 veces.
+6. Construir la distribución de diferencias esperadas bajo H0.
+7. Comparar la diferencia observada con esa distribución.
+
+Así se visualiza que la prueba de hipótesis pregunta qué tan compatible es
+el resultado observado con la hipótesis nula, no simplemente si "los
+promedios son diferentes".
+
+%%%%%%%%%%%%%%%
+
+Depredación y coloración de escarabajos
+
+Esta puede ser especialmente buena para biología evolutiva.
+
+Imagine una población de escarabajos:
+
+    50 % verdes
+
+    50 % marrones
+
+Los estudiantes simulan que las aves capturan escarabajos al azar.
+
+Después de 100 capturas observan, por ejemplo:
+
+    38 verdes
+
+    62 marrones
+
+Pregunta:
+
+    ¿Esta diferencia podría aparecer simplemente por azar si las aves
+    realmente no prefieren ningún color?
+
+Se simulan muchas muestras de 100 escarabajos bajo H0:p=0.5.
+
+Los estudiantes pueden visualizar:
+
+H₀ → simulación → distribución de resultados → resultado observado →
+evidencia contra H₀
+
+Es una forma muy natural de conectar estadística con selección natural.
+
+%%%%%%%%%%%%%%%%%%
+Sí. Para estudiantes de biología suele funcionar mejor que la prueba de
+hipótesis aparezca como una **simulación de un experimento biológico**, y no
+como una fórmula aislada.
+
+ Aquí tienes varias ideas que pueden convertirse en actividades de clase:
+
+ ## 1\. Monedas → semillas germinadas
+
+ **Objetivo:** introducir la idea de distribución bajo $H_0$, variabilidad
+ aleatoria y valor p.
+
+ - Supongamos que, en condiciones normales, **50 % de las semillas
+ %germinan**.
+- $H_0: p=0.50$
+- $H_1: p>0.50$
+- Los estudiantes simulan 20, 50 o 100 semillas mediante lanzamientos de
+moneda.
+- Repiten el experimento muchas veces y observan cuántas simulaciones
+producen, por azar, resultados como 70 %, 75 %, etc.
+- Después se introduce la pregunta central:
+
+ > **Si $H_0$ fuera cierta, ¿qué tan sorprendente sería obtener nuestro
+ resultado?**
+
+ Esto permite introducir el **valor p** de manera intuitiva antes de
+ calcularlo.
+
+---
+
+ ## 2\. Efecto de un fertilizante sobre el crecimiento
+
+ **Pregunta biológica:** ¿un fertilizante aumenta el crecimiento de las
+ plantas?
+
+ Se puede proporcionar a cada estudiante una muestra simulada:
+
+ | Control (cm) | Fertilizante (cm) |
+| --- | --- |
+| 12.1 | 14.2 |
+| 11.8 | 13.9 |
+| 13.0 | 14.5 |
+| 12.5 | 13.7 |
+| ... | ... |
+
+Planteamiento:
+
+ - $H_0:\mu_{\text{fertilizante}}-\mu_{\text{control}}=0$
+- $H_1:\mu_{\text{fertilizante}}-\mu_{\text{control}}\neq0$
+
+ ### Simulación
+
+ En lugar de comenzar con una prueba _t_, los estudiantes pueden:
+
+ 1. Calcular la diferencia observada entre los grupos.
+2. Mezclar todas las observaciones.
+3. Redistribuir aleatoriamente las plantas entre dos grupos.
+4. Calcular nuevamente la diferencia.
+5. Repetir 1.000 veces.
+6. Construir la distribución de diferencias esperadas bajo $H_0$.
+7. Comparar la diferencia observada con esa distribución.
+
+ Así se visualiza que **la prueba de hipótesis pregunta qué tan compatible
+ es el resultado observado con la hipótesis nula**, no simplemente si "los
+ promedios son diferentes".
+
+---
+
+ ## 3\. Depredación y coloración de escarabajos
+
+ Esta puede ser especialmente buena para biología evolutiva.
+
+ Imagine una población de escarabajos:
+
+ - 50 % verdes
+- 50 % marrones
+
+ Los estudiantes simulan que las aves capturan escarabajos al azar.
+
+ Después de 100 capturas observan, por ejemplo:
+
+ - 38 verdes
+- 62 marrones
+
+ Pregunta:
+
+ > ¿Esta diferencia podría aparecer simplemente por azar si las aves
+ realmente no prefieren ningún color?
+
+ Se simulan muchas muestras de 100 escarabajos bajo $H_0:p=0.5$.
+
+ Los estudiantes pueden visualizar:
+
+ **H₀ → simulación → distribución de resultados → resultado observado →
+ evidencia contra H₀**
+
+ Es una forma muy natural de conectar estadística con **selección natural**.
+
+---
+
+ ## 4\. Frecuencia de un alelo
+
+ Para genética de poblaciones:
+
+ Supongamos que la frecuencia esperada del alelo $A$ es:
+
+ $$
+p=0.30
+$$
+
+ Se simulan muestras de 100 individuos y se cuenta cuántos presentan el
+ alelo.
+
+ Luego se pregunta:
+
+ > Si la frecuencia verdadera fuera 0.30, ¿qué frecuencias muestrales
+ esperaríamos observar?
+
+ Los estudiantes generan, por ejemplo, **10.000 poblaciones simuladas** y
+ construyen un histograma.
+
+ Después se coloca una línea vertical en el valor observado.
+
+ Esto permite introducir:
+
+ - distribución muestral;
+- variabilidad;
+- hipótesis nula;
+- región extrema;
+- valor p;
+- error tipo I.
+
+---
+
+ ## 5\. "Detectives": ¿el tratamiento realmente funciona?
+
+ Una actividad interesante es proporcionar a cada grupo una **base de datos
+ diferente**, pero decirles únicamente:
+
+ > "Un investigador afirma que el tratamiento aumenta la supervivencia."
+
+ Cada grupo recibe datos de, por ejemplo, 30 individuos tratados y 30
+ controles.
+
+ Los estudiantes deben decidir:
+
+ 1. ¿Cuál es la variable respuesta?
+2. ¿Cuál sería $H_0$?
+3. ¿Cuál sería $H_1$?
+4. ¿Qué patrón esperaríamos si $H_0$ fuera cierta?
+5. ¿Qué tan extremo es nuestro resultado?
+6. ¿Qué conclusión estadística podemos sacar?
+
+ Después se comparan las decisiones entre grupos.
+
+ Esto ayuda a evitar que la enseñanza quede reducida a **"calcular un p y
+ compararlo con 0,05"**.
+
+---
+
+ ## Una simulación particularmente potente para una primera clase
+
+ Yo estructuraría una actividad alrededor de esta pregunta:
+
+ > **¿Puede aparecer una diferencia aparentemente grande simplemente por
+ azar?**
+
+ Por ejemplo, se plantea:
+
+ **Experimento:** 20 plantas reciben tratamiento A y 20 tratamiento B.
+
+ Se obtiene:
+
+ - A: media = 12,4 cm
+- B: media = 10,8 cm
+- diferencia = 1,6 cm
+
+ Antes de realizar cualquier prueba estadística, los estudiantes tienen que
+ apostar intuitivamente:
+
+ - "La diferencia es real".
+- "Podría ser azar".
+- "No hay suficiente información".
+
+ Luego comienza la simulación:
+
+ **Supongamos que el tratamiento no tiene ningún efecto.**
+
+ Se mezclan las 40 mediciones y se redistribuyen aleatoriamente en dos
+ grupos de 20.
+
+ Cada redistribución produce una diferencia.
+
+ Después de 1.000–10.000 redistribuciones aparece una distribución:
+
+```
+                 distribución bajo H₀
+
+                    ▄▄▄
+                  ▄█████▄
+                ▄█████████▄
+              ▄████████████▄
+          ▄▄▄████████████████▄▄▄
+       ▄█████████████████████████▄
+───────┴───────────────────────────┴───────
+     -2       -1       0       1       2
+                              ↑
+                         diferencia
+                          observada
+```
+
+ La pregunta deja de ser:
+
+ > "¿Cuál es la fórmula de la prueba?"
+
+ y pasa a ser:
+
+ > **"¿Qué tan frecuente sería obtener una diferencia de 1,6 cm o mayor si
+ realmente no hubiera efecto?"**
+
+ Ese cambio conceptual suele ser mucho más importante que memorizar la
+ fórmula.
+
+ ### Secuencia didáctica que puedes repetir
+
+ **Pregunta biológica → hipótesis nula → simulación bajo H₀ → distribución
+ nula → resultado observado → valor p → conclusión**
+
+ Y después puedes conectar la simulación con las pruebas formales:
+
+ - una media → prueba _t_;
+- dos grupos → _t_ de Student/Welch;
+- proporciones → prueba binomial o χ²;
+- frecuencias genotípicas → χ²;
+- asociación entre variables → correlación/regresión;
+- varios grupos → ANOVA.
+
+ Si quieres, también puedo prepararte una **simulación interactiva lista
+ para usar en clase**, donde los estudiantes puedan cambiar el tamaño de
+ muestra, el efecto biológico y el nivel de significancia y ver cómo cambia
+ la distribución nula, el valor _p_ y los errores tipo I/II.

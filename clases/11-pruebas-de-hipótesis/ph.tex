@@ -1,0 +1,624 @@
+
+% ------------------------------------------------------------
+\begin{frame}{Intervalos de confianza}
+
+Un intervalo de confianza proporciona un rango de valores
+compatibles con los datos y el procedimiento estadístico.
+
+Ejemplo:
+
+\[
+\widehat{\Delta}=2.4\text{ cm}
+\]
+
+\[
+IC_{95\%}=[0.8,\;4.0]\text{ cm}
+\]
+
+Podemos comunicar:
+
+\begin{quote}
+La diferencia estimada fue de 2.4 cm, con un intervalo de confianza
+del 95\% de 0.8 a 4.0 cm.
+\end{quote}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Pruebas de hipótesis comunes}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Pregunta} & \textbf{Prueba frecuente} & \textbf{Alternativa}\\
+\midrule
+Una media vs. valor & $t$ de una muestra & Wilcoxon\\
+Dos grupos & $t$ de dos muestras & Mann--Whitney\\
+Antes/después & $t$ pareada & Wilcoxon pareada\\
+Más de dos grupos & ANOVA & Kruskal--Wallis\\
+Dos variables categóricas & $\chi^2$ & Fisher\\
+Asociación lineal & correlación $t$ & Spearman\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{ANOVA: una advertencia importante}
+
+Un resultado significativo de ANOVA nos dice:
+
+\[
+\boxed{\text{no todas las medias son iguales}}
+\]
+
+Pero no identifica automáticamente:
+
+\[
+\text{qué grupos difieren entre sí}
+\]
+
+Para eso se requieren comparaciones posteriores apropiadas
+(post-hoc), teniendo en cuenta la multiplicidad.
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Pruebas no paramétricas}
+
+Cuando las condiciones de una prueba paramétrica no son razonables,
+pueden existir alternativas.
+
+Ejemplos:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Paramétrica & Alternativa frecuente\\
+\midrule
+$t$ independiente & Mann--Whitney\\
+$t$ pareada & Wilcoxon\\
+ANOVA & Kruskal--Wallis\\
+Correlación de Pearson & Spearman\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{alertblock}{Pero}
+``No paramétrica'' no significa ``sin supuestos''.
+\end{alertblock}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Supuestos: ¿por qué importan?}
+
+Una prueba estadística depende de un modelo.
+
+Por ejemplo, para una prueba $t$ pueden ser importantes:
+
+\begin{itemize}
+    \item independencia de las observaciones,
+    \item estructura adecuada del diseño,
+    \item distribución aproximadamente apropiada de los residuos,
+    \item ausencia de valores extremos que dominen el resultado.
+\end{itemize}
+
+\begin{block}{Principio}
+La prueba debe corresponder al diseño y a la estructura de los datos.
+\end{block}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Independencia: un problema muy común}
+
+Supongamos que medimos:
+
+\[
+10\text{ hojas por planta}
+\]
+
+de:
+
+\[
+5\text{ plantas}
+\]
+
+Tenemos 50 mediciones, pero no necesariamente:
+
+\[
+n=50
+\]
+
+observaciones independientes.
+
+Las hojas de una misma planta pueden estar correlacionadas.
+
+\begin{alertblock}{Pseudorreplicación}
+Tratar mediciones no independientes como réplicas independientes
+puede producir inferencias engañosas.
+\end{alertblock}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{¿Qué hacer antes de una prueba?}
+
+Antes de calcular un valor-$p$:
+
+\begin{enumerate}
+    \item Definir la pregunta científica.
+    \item Identificar la unidad experimental.
+    \item Revisar el diseño.
+    \item Explorar los datos.
+    \item Identificar variables y grupos.
+    \item Considerar supuestos.
+    \item Elegir el modelo/prueba.
+\end{enumerate}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Flujo de trabajo}
+
+\begin{center}
+
+\begin{tikzpicture}[node distance=1.3cm]
+
+\node[draw, rounded corners, fill=green!10] (q) {Pregunta biológica};
+\node[draw, rounded corners, fill=blue!10, right=of q] (d) {Diseño};
+\node[draw, rounded corners, fill=yellow!15, right=of d] (e) {Exploración};
+\node[draw, rounded corners, fill=orange!15, right=of e] (t) {Prueba/modelo};
+\node[draw, rounded corners, fill=red!10, right=of t] (i) {Interpretación};
+
+\draw[->, thick] (q) -- (d);
+\draw[->, thick] (d) -- (e);
+\draw[->, thick] (e) -- (t);
+\draw[->, thick] (t) -- (i);
+
+\end{tikzpicture}
+
+\end{center}
+
+\vspace{0.5cm}
+
+\centering
+\textbf{La prueba estadística no sustituye el razonamiento científico.}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}[fragile]{Ejemplo en R}
+
+Supongamos un conjunto de datos:
+
+\begin{lstlisting}[language=R]
+control <- c(12.1, 11.4, 13.2, 12.8, 11.9)
+tratado <- c(15.0, 14.2, 16.1, 15.4, 14.8)
+
+t.test(tratado, control)
+\end{lstlisting}
+
+La función produce, entre otros:
+
+\begin{itemize}
+    \item diferencia estimada,
+    \item estadístico $t$,
+    \item grados de libertad,
+    \item valor-$p$,
+    \item intervalo de confianza.
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}[fragile]{Ejemplo en Python}
+
+Con \texttt{scipy}:
+
+\begin{lstlisting}[language=Python]
+from scipy.stats import ttest_ind
+
+control = [12.1, 11.4, 13.2, 12.8, 11.9]
+tratado = [15.0, 14.2, 16.1, 15.4, 14.8]
+
+resultado = ttest_ind(tratado, control)
+
+print(resultado)
+\end{lstlisting}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Interpretación de un resultado}
+
+Supongamos que obtenemos:
+
+\[
+t=3.12
+\]
+
+\[
+p=0.014
+\]
+
+\[
+IC_{95\%}=[0.55,\;3.65]\text{ g}
+\]
+
+Una forma adecuada de comunicarlo:
+
+\begin{block}
+La biomasa media fue mayor en el grupo tratado que en el control,
+con una diferencia estimada de 2.1 g (IC 95\%: 0.55--3.65 g;
+$p=0.014$).
+\end{block}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{¿Significativo = importante?}
+
+No necesariamente.
+
+Consideremos:
+
+\[
+p<0.05
+\]
+
+Esto proporciona evidencia estadística contra $H_0$ según el análisis.
+
+Pero todavía debemos preguntar:
+
+\begin{itemize}
+    \item ¿Qué tan grande es el efecto?
+    \item ¿Es biológicamente relevante?
+    \item ¿Cuál es su incertidumbre?
+    \item ¿El diseño permite responder la pregunta?
+    \item ¿Existen posibles sesgos?
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Problema de comparaciones múltiples}
+
+Supongamos que hacemos 20 pruebas independientes con:
+
+\[
+\alpha=0.05
+\]
+
+Incluso si todas las hipótesis nulas fueran ciertas,
+la probabilidad de obtener al menos un resultado significativo puede ser
+alta.
+
+\[
+P(\text{al menos un falso positivo})
+=
+1-(1-0.05)^{20}
+\]
+
+\[
+\approx 0.64
+\]
+
+\begin{alertblock}{Idea}
+Muchas pruebas requieren considerar el problema de multiplicidad.
+\end{alertblock}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Correcciones por comparaciones múltiples}
+
+Algunas estrategias:
+
+\begin{itemize}
+    \item Bonferroni
+    \item Holm
+    \item Benjamini--Hochberg
+    \item Modelos que incorporan simultáneamente varios factores
+\end{itemize}
+
+La elección depende de:
+
+\begin{itemize}
+    \item objetivo inferencial,
+    \item número de comparaciones,
+    \item estructura del estudio,
+    \item control deseado del error.
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejercicio de discusión}
+
+Un investigador compara la abundancia de aves entre dos bosques.
+
+Obtiene:
+
+\[
+p=0.08
+\]
+
+Pregunta:
+
+\begin{enumerate}
+    \item ¿Podemos decir que ``no existe diferencia''?
+    \item ¿Qué información adicional necesitamos?
+    \item ¿Qué papel juega el tamaño de muestra?
+    \item ¿Qué papel juega el tamaño del efecto?
+    \item ¿Qué nos diría un intervalo de confianza?
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\pause
+
+\begin{block}{Discusión}
+No rechazar $H_0$ no equivale a demostrar que las poblaciones son idénticas.
+\end{block}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejercicio: elegir la prueba}
+
+Seleccione una estrategia para cada situación:
+
+\begin{enumerate}
+    \item Comparar crecimiento entre tratamiento y control.
+    \item Comparar crecimiento antes y después en los mismos individuos.
+    \item Comparar biomasa entre cuatro tratamientos.
+    \item Evaluar asociación entre temperatura y tasa metabólica.
+    \item Evaluar asociación entre dos variables categóricas.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\pause
+
+\textbf{Discusión:}
+
+\begin{itemize}
+    \item $t$ independiente
+    \item $t$ pareada
+    \item ANOVA
+    \item correlación/regresión
+    \item $\chi^2$ o Fisher
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejercicio integrador}
+
+Tenemos datos de crecimiento de plantas.
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Planta & Control & Fertilizante\\
+\midrule
+1 & 10.2 & 12.1\\
+2 & 11.4 & 12.8\\
+3 & 9.8 & 11.9\\
+4 & 10.7 & 13.0\\
+5 & 10.9 & 12.5\\
+6 & 11.2 & 13.1\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Preguntas:
+
+\begin{enumerate}
+    \item ¿Cuál es la unidad experimental?
+    \item ¿Cuál es $H_0$?
+    \item ¿Cuál es $H_A$?
+    \item ¿Qué prueba usarían?
+    \item ¿Qué supuestos revisarían?
+    \item ¿Qué resultado reportarían?
+\end{enumerate}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Ejercicio integrador: razonamiento}
+
+Una posible formulación:
+
+\[
+H_0:\mu_F-\mu_C=0
+\]
+
+\[
+H_A:\mu_F-\mu_C\neq0
+\]
+
+Si los grupos son independientes y los supuestos son razonables:
+
+\[
+\boxed{\text{prueba }t\text{ de dos muestras}}
+\]
+
+Pero la prueba final depende del diseño real.
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Errores frecuentes}
+
+\begin{itemize}
+    \item Elegir la prueba mirando únicamente el valor-$p$.
+    \item Interpretar $p$ como la probabilidad de que $H_0$ sea cierta.
+    \item Confundir ``no significativo'' con ``sin efecto''.
+    \item Ignorar la independencia.
+    \item Hacer muchas pruebas sin considerar multiplicidad.
+    \item Reportar únicamente el valor-$p$.
+    \item Ignorar el tamaño del efecto.
+    \item Convertir automáticamente resultados estadísticos en conclusiones
+    biológicas.
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{¿Cómo reportar una prueba de hipótesis?}
+
+Una buena comunicación incluye:
+
+\begin{enumerate}
+    \item Qué se comparó.
+    \item Qué efecto se estimó.
+    \item Tamaño del efecto.
+    \item Intervalo de confianza.
+    \item Prueba/modelo utilizado.
+    \item Valor-$p$.
+    \item Tamaño de muestra.
+    \item Información relevante sobre el diseño.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\begin{block}{Ejemplo}
+El tratamiento aumentó la biomasa en 2.1 g
+(IC 95\%: 0.55--3.65; $t=3.12$, $p=0.014$).
+\end{block}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Mapa mental}
+
+\begin{center}
+\Large
+
+\[
+\boxed{\text{Pregunta biológica}}
+\]
+
+$\downarrow$
+
+\[
+\boxed{\text{Diseño y datos}}
+\]
+
+$\downarrow$
+
+\[
+\boxed{H_0\quad vs.\quad H_A}
+\]
+
+$\downarrow$
+
+\[
+\boxed{\text{Estadístico + incertidumbre}}
+\]
+
+$\downarrow$
+
+\[
+\boxed{\text{Valor-}p}
+\]
+
+$\downarrow$
+
+\[
+\boxed{\text{Tamaño del efecto}}
+\]
+
+$\downarrow$
+
+\[
+\boxed{\text{Interpretación biológica}}
+\]
+
+\end{center}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Resumen}
+
+\begin{itemize}
+    \item Las pruebas de hipótesis permiten cuantificar evidencia
+    frente a una hipótesis nula bajo un modelo estadístico.
+    \item El valor-$p$ no es la probabilidad de que una hipótesis sea
+    verdadera.
+    \item Debemos distinguir errores tipo I y tipo II.
+    \item La potencia depende, entre otras cosas, del tamaño de muestra,
+    efecto y variabilidad.
+    \item La significancia estadística no equivale a importancia biológica.
+    \item El diseño experimental y la independencia son fundamentales.
+    \item Debemos reportar efectos e incertidumbre, no únicamente
+    valores-$p$.
+\end{itemize}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Preguntas para cerrar la clase}
+
+\begin{enumerate}
+    \item ¿Qué pregunta responde realmente un valor-$p$?
+    \item ¿Cuál es la diferencia entre ``no rechazar $H_0$''
+    y ``aceptar $H_0$''?
+    \item ¿Qué es un error tipo I?
+    \item ¿Qué factores afectan la potencia?
+    \item ¿Por qué el tamaño del efecto es importante?
+    \item ¿Por qué la independencia importa tanto en biología?
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\centering
+\Large
+\textbf{La estadística debe ayudar a responder preguntas biológicas,
+no reemplazarlas.}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}{Actividad posterior}
+
+\begin{block}{Tarea}
+Tome un conjunto de datos biológicos y construya un análisis que incluya:
+\end{block}
+
+\begin{enumerate}
+    \item Pregunta científica.
+    \item Variable respuesta.
+    \item Variable explicativa.
+    \item Unidad experimental.
+    \item $H_0$ y $H_A$.
+    \item Visualización exploratoria.
+    \item Prueba o modelo seleccionado.
+    \item Tamaño del efecto.
+    \item Intervalo de confianza.
+    \item Valor-$p$.
+    \item Interpretación biológica.
+\end{enumerate}
+
+\end{frame}
+
+% ------------------------------------------------------------
+\begin{frame}
+\centering
+\Huge
+\textcolor{bioGreen}{Gracias}
+
+\vspace{0.5cm}
+
+\Large
+¿Preguntas?
+\end{frame}
+
+% ============================================================
+\end{document}
+% ============================================================

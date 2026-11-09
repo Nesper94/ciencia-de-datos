@@ -1,0 +1,570 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage[style=authoryear-icomp, backend=biber]{biblatex}
+\usepackage{booktabs}
+\usetheme{jcar}
+
+%\includeonlyframes{a} % Para compilar solo en la que se está trabajando
+
+%\addbibresource{refs.bib}
+
+\begin{document}
+\author[Juan C. Arboleda Rivera]{Juan Camilo Arboleda Rivera}
+\title{Ejemplo práctico:\\Comparación de dos muestras}
+%\subtitle{}
+%\titlegraphic{\includegraphics[width=2cm]{udea}}
+\institute[U. de A.]{Instituto de Biología\\
+  Facultad de Ciencias Exactas y Naturales\\
+  Universidad de Antioquia\\
+  juan.arboleda2@udea.edu.co}
+\date{v: \today}
+%\subject{}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+%\begin{frame}
+% \frametitle{Contenidos}
+% \tableofcontents
+%\end{frame}
+
+\section{}
+
+% ------------------------------------------------
+\begin{frame}{Una pregunta biológica}
+
+Supongamos que queremos saber si un antibiótico afecta el crecimiento de una
+bacteria.
+
+\vspace{0.5cm}
+
+Tenemos dos grupos:
+
+\begin{itemize}
+    \item \textbf{Control}: bacterias sin antibiótico.
+    \item \textbf{Tratamiento}: bacterias con antibiótico.
+\end{itemize}
+
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}
+[label=a]
+{Densidad óptica (OD)}{}
+ \centering
+ Medimos el crecimiento de cada grupo mediante la densidad óptica a 600 nm:
+
+ \vspace{-1em}
+
+ \[
+ \text{OD}_{600}
+ \]
+
+ \includegraphics[width=\linewidth]{absorption_vs_od.png}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}
+[label=a]
+{Densidad óptica (OD)}{}
+ \centering
+ \includegraphics[height=.85\textheight]{densidad-óptica.jpeg}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}
+[label=a]
+{}{}
+ \centering
+ \includegraphics[height=.85\textheight]{EcoliSaturated-12.png}
+\end{frame}
+
+\begin{frame}
+[label=a]
+{}{}
+ \centering
+
+
+ \begin{alertblock}{Pregunta}
+ ¿La diferencia que observamos entre los grupos es suficientemente grande
+ como para pensar que el tratamiento realmente tiene un efecto?
+ \end{alertblock}
+
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Los datos}
+
+\begin{columns}
+ \column{.5\linewidth}
+  \begin{table}
+  \centering
+  \begin{tabular}{cc}
+  \toprule
+  Control & Tratamiento \\
+  \midrule
+  0.82 & 0.61\\
+  0.76 & 0.58\\
+  0.89 & 0.69\\
+  0.64 & 0.73\\
+  0.88 & 0.56\\
+  0.79 & 0.62\\
+  0.84 & 0.59\\
+  0.67 & 0.65\\
+  0.87 & 0.57\\
+  0.80 & 0.60\\
+  \bottomrule
+  \end{tabular}
+  \end{table}
+ \column{.5\linewidth}
+  Las medias son aproximadamente:
+
+  \[
+  \bar{x}_{C}=0.796
+  \qquad
+  \bar{x}_{T}=0.620
+  \]
+
+  Por tanto,
+
+  \[
+  \boxed{
+  \bar{x}_{C}-\bar{x}_{T}=0.176
+  }
+  \]
+\end{columns}
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Pero... ¿0.176 es mucho o poco?}
+
+Una diferencia entre dos grupos puede aparecer por diferentes razones.
+
+\vspace{0.3cm}
+
+\begin{enumerate}[<+->]
+    \item Existe variabilidad biológica entre las muestras.
+    \item La diferencia apareció por azar.
+    \item El tratamiento realmente tiene un efecto.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\onslide<4->{
+
+ La estadística nos ayuda a responder:
+
+ \begin{alertblock}{Pregunta clave}
+ Si el tratamiento \textbf{no tuviera ningún efecto},
+ ¿qué tan frecuente sería observar una diferencia como la que encontramos?
+ \end{alertblock}
+}
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{La hipótesis nula}
+
+Para formalizar la pregunta planteamos una hipótesis nula:
+
+\only<1>{\centering ¿Cuál sería la hipótesis en este caso?}
+
+\pause
+
+\[
+H_0:
+\quad
+\text{El tratamiento no cambia el crecimiento bacteriano}
+\]
+
+Es decir, bajo $H_0$:
+
+\[
+\boxed{\text{Control y tratamiento son intercambiables}}
+\]
+
+\vspace{0.5cm}
+
+Si esto fuera cierto, ¿qué impediría que una bacteria que estaba
+en el grupo control estuviera en el grupo tratamiento?
+
+\vspace{0.3cm}
+
+\pause
+
+Nada.
+
+\begin{center}
+\Large
+Podemos \textbf{reordenar aleatoriamente} las etiquetas.
+\end{center}
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{La idea de la permutación}
+
+Tenemos las 20 mediciones:
+
+\[
+0.82,\;0.76,\;0.89,\ldots,\;0.57,\;0.60
+\]
+
+Ignoramos temporalmente las etiquetas
+``control'' y ``tratamiento''.
+
+\vspace{0.4cm}
+
+Después:
+
+\begin{enumerate}
+    \item Mezclamos las 20 observaciones.
+    \item Elegimos 10 al azar para formar un nuevo grupo.
+    \item Las otras 10 forman el segundo grupo.
+    \item Calculamos nuevamente la diferencia entre las medias.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+Repetimos este procedimiento muchas veces.
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{¿Qué estamos simulando?}
+
+Cada reorganización responde a la pregunta:
+
+\begin{center}
+\Large
+``¿Qué diferencia podríamos observar \\
+si $H_0$ fuera cierta?''
+\end{center}
+
+\vspace{0.5cm}
+
+Después de muchas permutaciones obtenemos una distribución:
+
+\[
+\boxed{
+\text{Distribución de diferencias esperadas bajo }H_0
+}
+\]
+
+Esta distribución representa lo que podría ocurrir
+\textbf{por azar} si el tratamiento no tuviera efecto.
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{La diferencia observada}
+
+Nuestra diferencia original fue:
+
+\[
+D_{\mathrm{obs}}
+=
+\bar{x}_{C}-\bar{x}_{T}
+=
+0.176
+\]
+
+Ahora imaginemos que hacemos:
+
+\[
+10\,000
+\]
+
+permutaciones.
+
+\vspace{0.4cm}
+
+Para cada permutación calculamos:
+
+\[
+D_i
+=
+\bar{x}_{1,i}-\bar{x}_{2,i}
+\]
+
+y preguntamos:
+
+\begin{center}
+\Large
+¿Cuántas diferencias son tan extremas como $0.176$?
+\end{center}
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{¿Qué es el valor $p$?}
+
+El valor $p$ es la proporción de resultados tan extremos
+como el observado, \textbf{suponiendo que $H_0$ es cierta}.
+
+\vspace{0.5cm}
+
+En una prueba de permutación podemos estimarlo mediante:
+
+\[
+\boxed{
+\hat p =
+\frac{\#\{\text{permutaciones tan extremas como la observada}\}}
+{\#\{\text{permutaciones}\}}
+}
+\]
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Un ejemplo}
+
+Supongamos que hacemos:
+
+\[
+10\,000
+\]
+
+permutaciones.
+
+Encontramos que solamente: \vspace{-1em}
+
+\[
+73
+\]
+
+producen una diferencia igual o mayor que la observada
+en valor absoluto.
+
+Entonces:
+
+\[
+\hat p =
+\frac{73}{10\,000}
+=
+0.0073
+\]
+
+Por tanto:
+
+\[
+\boxed{p \approx 0.007}
+\]
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{¿Cómo interpretamos $p=0.007$?}
+
+Una interpretación adecuada sería:
+
+\vspace{0.4cm}
+
+\begin{alertblock}{Interpretación}
+Si realmente no hubiera diferencia entre control y tratamiento,
+una diferencia tan extrema como la observada aparecería en
+aproximadamente el $0.7\%$ de las reorganizaciones aleatorias.
+\end{alertblock}
+
+\vspace{0.5cm}
+
+Esto proporciona evidencia contra la hipótesis nula.
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Lo que el valor $p$ NO significa}
+
+Si obtenemos:
+
+\[
+p=0.007
+\]
+
+\textbf{NO} significa:
+
+\begin{itemize}
+    \item ``Hay un $0.7\%$ de probabilidad de que $H_0$ sea cierta.''
+    \item ``Hay un $99.3\%$ de probabilidad de que el tratamiento funcione.''
+    \item ``El resultado es $99.3\%$ correcto.''
+\end{itemize}
+
+\vspace{0.4cm}
+
+El valor $p$ habla de:
+
+\begin{center}
+\Large
+\textbf{los datos bajo la hipótesis nula}
+\end{center}
+
+no de la probabilidad de que la hipótesis sea verdadera.
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{¿Por qué usamos un umbral como 0.05?}
+
+Es común utilizar:
+
+\vspace{-1em}
+
+\[
+\alpha=0.05
+\]
+
+como umbral de decisión.
+
+\vspace{0.5cm}
+
+Una regla convencional es:
+
+\[
+\begin{cases}
+p < 0.05 &\Rightarrow \text{rechazar }H_0\\
+p \geq 0.05 &\Rightarrow \text{no rechazar }H_0
+\end{cases}
+\]
+
+Pero:
+
+\begin{alertblock}{Importante}
+$0.05$ no es una frontera mágica entre
+``verdadero'' y ``falso''.
+\end{alertblock}
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Significativo no significa importante}
+
+Imaginemos dos experimentos.
+
+\vspace{0.3cm}
+
+\textbf{Experimento A}
+
+\[
+\Delta = 0.20,
+\qquad p=0.001
+\]
+
+\textbf{Experimento B}
+
+\[
+\Delta = 0.02,
+\qquad p=0.001
+\]
+
+\vspace{0.4cm}
+
+Ambos pueden ser estadísticamente significativos.
+
+Pero la pregunta biológica es diferente:
+
+\begin{center}
+\large
+¿Qué tan grande es el efecto y qué significa biológicamente?
+\end{center}
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Valor $p$ y tamaño del efecto}
+
+Una buena pregunta científica no es solamente:
+
+\[
+\text{``¿Es significativo?''}
+\]
+
+También debemos preguntar:
+
+\[
+\boxed{\text{¿Qué tan grande es la diferencia?}}
+\]
+
+y
+
+\[
+\boxed{\text{¿Es biológicamente relevante?}}
+\]
+
+\vspace{0.5cm}
+
+En nuestro ejemplo:
+
+\vspace{-1em}
+
+\[
+\Delta = 0.176
+\]
+
+El valor $p$ nos ayuda a evaluar la evidencia contra $H_0$,
+pero no reemplaza la descripción del efecto.
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Ejercicio}
+
+Usen los datos del experimento bacteriano.
+
+\vspace{0.3cm}
+
+\begin{enumerate}
+    \item Mezclen las 20 observaciones.
+    \item Asignen aleatoriamente 10 al grupo A y 10 al grupo B.
+    \item Calculen:
+    \[
+    D=\bar{x}_A-\bar{x}_B
+    \]
+    \item Repitan el procedimiento muchas veces.
+    \item Construyan un histograma de las diferencias.
+    \item Marquen la diferencia observada:
+    \[
+    D_{\mathrm{obs}}=0.176
+    \]
+    \item Estimen el valor $p$.
+\end{enumerate}
+
+\end{frame}
+
+% ------------------------------------------------
+\begin{frame}{Resumen}
+
+\begin{enumerate}
+    \item El valor $p$ se calcula \textbf{suponiendo que la hipótesis nula
+    es cierta}.
+
+    \item Pregunta fundamental:
+    \[
+    \text{¿Qué tan compatible son los datos con }H_0?
+    \]
+
+    \item Una prueba de permutación permite responder esta pregunta
+    de manera intuitiva mediante la aleatorización.
+
+    \item Un valor $p$ pequeño proporciona evidencia contra $H_0$,
+    pero no mide el tamaño ni la importancia biológica del efecto.
+\end{enumerate}
+
+\vspace{0.4cm}
+
+\begin{center}
+\Large
+\textbf{Datos $\rightarrow$ azar bajo $H_0$ $\rightarrow$ valor $p$
+$\rightarrow$ interpretación biológica}
+\end{center}
+
+\end{frame}
+
+%\appendix
+%\AtNextBibliography{\footnotesize}
+%\begin{frame}[plain, allowframebreaks]{Bibliografía}{}
+% \bibitemsep 1em
+% \printbibliography[heading=none]
+%\end{frame}
+\end{document}

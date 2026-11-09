@@ -1,0 +1,657 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage[style=authoryear-icomp, backend=biber]{biblatex}
+\usetheme{jcar}
+
+%\includeonlyframes{a} % Para compilar solo en la que se está trabajando
+
+%\addbibresource{refs.bib}
+
+\begin{document}
+\author[Juan C. Arboleda Rivera]{Juan Camilo Arboleda Rivera}
+\title{Probabilidad}
+%\subtitle{}
+%\titlegraphic{\includegraphics[width=2cm]{udea}}
+\institute[U. de A.]{Instituto de Biología\\
+  Facultad de Ciencias Exactas y Naturales\\
+  Universidad de Antioquia\\
+  juan.arboleda2@udea.edu.co}
+\date{v: \today}
+%\subject{}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\begin{frame}
+ \frametitle{Contenidos}
+ \tableofcontents
+\end{frame}
+
+\section{Probabilidad en Ciencia de datos}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ Supongamos que queremos saber el peso promedio de la\\
+ tortuga verde (\textit{Chelonia mydas})\\
+ ¿Podemos conocer ese valor?\\
+ \vspace{.2em}
+ \includegraphics[height=.75\textheight]{tortuga-verde.jpeg}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \LARGE
+ Cuando tomamos datos, tenemos una \textbf{muestra}, no toda la
+ \textbf{población}, y en cada muestra los valores pueden ser diferentes
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{¿Por qué es importante la probabilidad en ciencia de datos?}{}
+ \centering \small
+  Tenemos datos de la expresión de un gen en personas sanas y personas
+  enfermas. ¿Podemos concluir que en personas enfermas se expresa más el
+  gen? \onslide<2>{¿Qué tan probable es observar una diferencia como la
+    encontrada entre dos grupos simplemente por azar?}\\
+
+  \vspace{.3cm}
+
+ \includegraphics[height=.7\textheight]{cd177-covid.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \small
+ Si tenemos datos de expresión de organismos normales (Wildtype) y datos de
+ expresión de organismos mutantes
+ ¿Qué tan probable es que se obtengan los siguientes resultados por azar?
+ \\
+ \vspace{.3cm}
+
+ \includegraphics[height=.75\textheight]{ligand-binding-site.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{¿Por qué es importante la Probabilidad en Ciencia de datos?}{}
+ \centering
+ \textbf{Existe variabilidad biológica}\\~\\
+ Los organismos no son idénticos; existen diferencias genéticas,
+ fisiológicas y ambientales. La probabilidad ayuda a describir y comprender
+ esa variación.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \textbf{Incertidumbre}\\~\\
+ Las mediciones nunca son exactas, incluso un mismo valor (e.g. la longitud
+ del pico de un colibrí), será diferente si es medido por diferentes
+ personas o incluso en mediciones repetidas por la misma persona. La
+ probabilidad ayuda a describir y estudiar la incertidumbre en las medidas.\\
+ \vspace{.8em}
+ \includegraphics[height=.55\textheight]{Incertidumbre-de-Medida.jpg}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{¿Por qué es importante la Probabilidad en Ciencia de datos?}{}
+ \centering
+ \textbf{Análisis de datos experimentales}\\~\\
+ En biología se trabaja con muestras (por ejemplo, grupos de pacientes o
+ poblaciones de organismos), no siempre con todos los individuos. La
+ probabilidad permite estimar si los resultados observados podrían deberse
+ al azar o si muestran patrones reales.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \textbf{Predicción de fenómenos biológicos}\\~\\
+ Los modelos probabilísticos ayudan a predecir eventos como la propagación
+ de enfermedades, la respuesta de un paciente a un tratamiento o la
+ evolución de una población.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \textbf{Aprendizaje automático e inteligencia artificial}\\~\\
+ Muchos algoritmos usados en bioinformática, como los modelos de
+ clasificación de genes, análisis de imágenes médicas o predicción de
+ estructuras de proteínas, utilizan conceptos probabilísticos para aprender
+ de los datos.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \textbf{Evaluación de riesgos y toma de decisiones}\\~\\
+ Permite calcular probabilidades de aparición de enfermedades, identificar
+ factores de riesgo y comparar diferentes hipótesis científicas.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \textbf{Interpretación de información genética}\\~\\
+ En áreas como la genómica, la probabilidad se usa para identificar
+ mutaciones relevantes, analizar relaciones evolutivas y estimar la función
+ de genes.\\
+ \includegraphics[height=.75\textheight]{probabilidad-genética.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ La probabilidad se usa habitualmente en todas las áreas de la Biología,\\
+ por ejemplo en la construcción de árboles filogenéticos\\
+ \vspace{.2em}
+ \includegraphics[height=.85\textheight]{bayesian_trees.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ De manera general la \textbf{Probabilidad} nos permite cuantificar qué tan
+ plausibles son determinados resultados, lo cual es esencial para comprender
+ la Naturaleza.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\section{Introducción a la Probabilidad}
+
+\begin{frame}
+%[label=a]
+{¿Qué es la Probabilidad?}{}
+ \centering
+ \begin{block}<1->{Interpretación frecuentista}
+ Define la probabilidad como la frecuencia relativa de un evento tras
+ repetir un experimento un número grande o infinito de veces bajo las mismas
+ condiciones.\\~\\
+
+ \[ P(A) = \dfrac{\text{Número de resultados que hacen que el evento } A
+ \text{ suceda}}{\text{Número total de resultados}} \]
+ \end{block}
+
+ \pause
+
+ \vspace{.4cm}
+ \textbf{Ejemplo:}\\
+ La probabilidad de lanzar un dado y que salga el número 5 es 1/6.
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{¿Qué es la Probabilidad?}{}
+ \centering
+
+ \begin{block}{Interpretación bayesiana}
+ Define la probabilidad como el grado de creencia o certeza sobre un evento
+ basándose en el conocimiento previo y la nueva evidencia
+ \end{block}
+
+ \vspace{.4cm}
+
+ \pause
+ \textbf{Ejemplo:}\\
+ La probabilidad de que llueva en la noche es del 20\%.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \large
+ La función de probabilidad $ P $, asigna a cada evento una probabilidad de
+ ocurrencia. $ P(A) $, es la probabilidad de que el evento $ A $ ocurra al
+ efectuar un experimento\\~\\
+
+ Por convención la probabilidad es un número entre 0 y 1 o entre 0 y 100\%
+ \\~\\
+
+ Un evento imposible tiene probabilidad cero\\
+ Un evento que ocurre con certeza tiene probabilidad 1\\
+ \vspace{.4em}
+	\includegraphics[width=.6\linewidth]{probability_line.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Espacio muestral}{}
+ \centering \Large
+ Para el calculo de probabilidades, se suele definir primero el
+ espacio muestral ($ E $), definido como {\color{blue} el conjunto de todos
+ los resultados posibles de un experimento}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejemplo}{Lanzamiento de una moneda}
+ \centering \Large
+ \includegraphics[height=.5\textheight]{moneda500.jpg}\\
+ Para una moneda que tiene cara ($ C $) y sello ($ S $), el espacio muestral
+ sería: $E=\{C, S\}$.\\
+
+ Además
+
+ $P(E) = P(C) + P(S)  = 1 $
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad de eventos complementarios}{}
+ \centering \Large
+ Si la probabilidad de que ocurra un evento es del 40\% la probabilidad de
+ que NO ocurra es del 60\%.\\
+
+ \[ P(\text{evento NO ocurra})= 1 - P(\text{evento ocurra}) \]
+
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad de eventos complementarios}{}
+ \centering \large
+ Sea $ A $ el evento de que al lanzar un dado el resultado sea mayor a 4,
+ entonces\\
+ $ P(A) = 2/6 $
+ \\
+ \includegraphics[height=.7\textheight]{eventos-complementarios.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+ ¿Cuál es la probabilidad de que un dado muestre un número par?\\~\\
+ \textbf{Ejercicio:} Hacer simulación computacional
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Eventos disjuntos o Mutuamente excluyentes}{}
+ \centering
+ \begin{itemize}
+ \item Eventos disjuntos son sucesos que no pueden ocurrir al mismo tiempo.
+ \item No tienen resultados o elementos en común.
+ \item Su intersección es igual a cero: $ P(A \cap B) = 0 $
+ \end{itemize}
+
+ \vspace{1em}
+ \pause
+ Ejemplos de eventos disjuntos:
+
+ \begin{itemize}
+ \item Lanzar una moneda y obtener cara y sello al mismo tiempo no es
+ posible.
+ \item Al extraer una sola carta de una baraja no es posible sacar un As y
+ una Reina al mismo tiempo.
+ \item Obtener un número par y un impar al lanzar un dado una sola vez.
+ \end{itemize}
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad de eventos disjuntos}{}
+ \centering \Large
+ Si $ A $ y $ B $ son disjuntos, $ P(A \cup B) = P(A) + P(B) $
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejemplo}{}
+ \centering \large
+% \includegraphics[height=.85\textheight]{}
+
+ ¿Cuál es la probabilidad de que por lo menos, salga una cara en dos tiradas
+ de una moneda? \\~\\
+
+ $ E = \{CC , CS, SC, SS\} $\\~\\
+
+ Si asumimos que cada evento ocurre bajo las mismas condiciones, la
+ probabilidad viene dada por: \\~\\
+
+ $P(E) = \dfrac{ \{CC, CS, SC\} }{ \{CC , CS, SC, SS\} } = \dfrac{3}{4}$
+ \\~\\
+
+ Ejercicio: Corroborar con un experimento computacional
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad de eventos NO disjuntos}{}
+ \centering
+
+ Dos eventos son no disjuntos cuando tienen al menos un resultado o elemento
+ en común. Si $ A $ y $ B $ son NO disjuntos, entonces
+
+ \[ P(A \cup B) = P(A) + P(B) - P(A \cap B) \]
+
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad de eventos NO disjuntos}{}
+ \centering
+ \textbf{Ejemplo}\\~\\
+
+ Al lanzar un dado, se quiere calcular la probabilidad de obtener un número
+ par (evento $ A $) o un número menor o igual a 2 (evento $ B $).\\~\\
+
+ \pause
+
+ \begin{enumerate}[<+->]
+
+ \item Espacio muestral $E: \{1, 2, 3, 4, 5, 6\}\) (6 resultados
+ totales).
+
+ \item Evento $ A $ (número par): \(\{2, 4, 6\} \rightarrow P(A) =
+ \frac{3}{6}\).
+
+ \item Evento $ B $ (menor o igual a 2): \(\{1, 2\} \rightarrow P(B) =
+ \frac{2}{6}\).
+
+ \item Intersección (\(A \cap B\)): El número 2 está en ambos grupos
+ \(\rightarrow P(A \cap B) = \frac{1}{6}\)
+ \end{enumerate}
+
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Independencia}{}
+ \centering \Large
+
+ Dos eventos A y B son independientes si la probabilidad de que suceda el
+ evento A no cambia la probabilidad del evento B. Estos eventos sí podrían
+ suceder al mismo tiempo.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad de eventos independientes}{}
+ \centering \large
+ Si A y B son eventos independientes, \\~\\
+
+ $ P(A \text{ y } B) = P(A) \cdot P(B) $ \\~\\
+
+ En general, para cualquier número de eventos independientes, la
+ probabilidad de que todos los eventos sucedan es el producto de las
+ probabilidades de que sucedan los eventos individuales.
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejemplo}{}
+ \centering \large
+ La probabilidad de que una pareja tenga un hijo y sea mujer es igual a la
+ probabilidad de que sea hombre ($ 1/2 $). La probabilidad de que esta
+ pareja tenga un hijo con albinismo es $ 1/4 $.\\~\\
+ ¿Cuál es la probabilidad de que tengan un hijo varón con albinismo?
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad condicional}{}
+ \centering \Large
+ La probabilidad condicional es la probabilidad de que ocurra un evento
+ (llamado $ A $) dado que ya ha sucedido otro evento relacionado ($ B $)\\~\\
+  Se calcula mediante la siguiente ecuación:
+  \[
+  P(A|B)=\frac{P(A \cap B)}{P(B)}
+  \]
+
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad condicional}{}
+ \centering
+ \includegraphics[height=.85\textheight]{Probabilidad_condicionada.pdf}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Probabilidad condicional}{}
+ \centering
+ \includegraphics[height=.85\textheight]{pbb-cond2.jpeg}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejemplo}{}
+ \centering
+ Supongamos que en una población de 1000 personas:
+
+ \begin{itemize}
+ \item 100 personas tienen una enfermedad (E).
+
+ \item De esas 100 personas con la enfermedad, 80 presentan un síntoma
+ específico (S).
+ \end{itemize}
+
+ \vspace{1em}
+ Queremos saber: ¿cuál es la probabilidad de que una persona tenga la
+ enfermedad si sabemos que presenta el síntoma? Es decir: la probabilidad de
+ tener la enfermedad dado que se observa el síntoma.\\~\\
+
+ \pause
+
+ Necesitamos conocer:
+ \begin{itemize}
+ \item Personas con síntoma: supongamos que 200 personas tienen el síntoma.
+
+ \item Personas con enfermedad y síntoma: 80 personas.
+ \end{itemize}
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejemplo}{}
+ \centering
+ % Probabilidad condicional
+ \[
+ P(\text{Enfermedad}|\text{Síntoma})
+ \]
+
+ % Aplicación al ejemplo biológico
+ \[
+ P(E|S)=\frac{P(E \cap S)}{P(S)}
+ \]
+
+ % Sustitución con los valores del ejemplo
+ \[
+ P(E|S)=\frac{80}{200}=0.4
+ \]
+
+ En porcentaje:
+ \[
+ 0.4 \times 100 = 40\%
+ \]
+
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \[
+ P(\text{Enfermedad}|\text{Síntoma})=40\%
+ \]
+
+ \textbf{Interpretación:} Si una persona presenta el síntoma, la
+ probabilidad de que tenga la enfermedad es del 40\%.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejercicio}{}
+ \centering
+ En un estudio sobre una población de plantas, los investigadores analizan
+ la presencia de un gen de resistencia a una enfermedad.\\~\\
+
+ Se estudian 500 plantas y se obtiene la siguiente información:
+
+ \begin{itemize}
+ \item 150 plantas poseen el gen de resistencia (R).
+
+ \item De las plantas que poseen el gen de resistencia, 120 sobrevivieron
+ después de ser expuestas a la enfermedad (S).
+
+ \item En total, 200 plantas sobrevivieron después de la exposición.
+ \end{itemize}
+
+ \vspace{1em}
+ ¿Cuál es la probabilidad de que una planta tenga el gen de resistencia
+ sabiendo que sobrevivió a la enfermedad?
+ \[ P(R|S) \]
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+%\begin{frame}
+%[label=a]
+%{}{}
+% \centering
+% Supongamos que tenemos una bolsa con tres bolas: roja, verde y azul, y
+% realizamos el siguiente experimento: Mezclas las bolas y sacas una.
+% Después, vuelves a mezclar las bolas y sacas la segunda, sin reponer la
+% primera.\\~\\
+%
+%\begin{itemize}
+%\item ¿Cual es la probabilidad de sacar una bola verde primero seguida de
+%una roja?
+%
+%\item ¿Cual es la probabilidad de que uno de las dos bolas sea verde y la
+%otra roja?
+%
+%\end{itemize}
+% Realiza el cálculo de forma teórica y comprueba tu solución con un
+% experimento computacional.
+%
+%% \includegraphics[height=.85\textheight]{}
+%\end{frame}
+
+\section{Variables aleatorias y distribuciones}
+
+\begin{frame}
+%[label=a]
+{Variable aleatoria}{}
+ \centering \large
+
+ \begin{block}{Variable aleatoria}
+ \begin{enumerate}[<+->]
+ \item Una variable aleatoria es una forma de representar matemáticamente
+ una cantidad cuyo valor no conocemos antes de observarla.
+
+ \item Una variable aleatoria es una variable cuyo valor depende del
+ resultado de un proceso aleatorio.
+ \end{enumerate}
+ \end{block}
+
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \large
+ Existen procesos \textbf{fundamentalmente aleatorios} como el decaimiento
+ radiactivo\\
+ \includegraphics[height=.85\textheight]{decaimiento-radiactivo.jpeg}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ En la mayoría de procesos la ``aleatoriedad'' surge del
+ \textbf{conocimiento u observabilidad incompleta} del fenómeno.\\
+ \vspace{1em}
+ \includegraphics[height=.65\textheight]{moneda.jpg}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ A partir de una distribución de frecuencias o \textbf{Histograma} podemos
+ estimar probabilidades, siguiendo la interpretación frecuentista de la
+ probabilidad.\\
+ \vspace{.2em}
+ \includegraphics[height=.85\textheight]{distribución-de-frecuencias}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Distribución de probabilidad}{}
+ \centering
+ Indica la probabilidad de obtener cierto valor de una \textbf{variable
+ aleatoria}
+ \begin{columns}
+  \column{.5\linewidth}
+   \includegraphics[height=.8\textheight]{distribución-pbb}
+  \column{.5\linewidth}
+  \vspace{-2em}
+  \[
+  \scalebox{1.5}{$ \displaystyle
+  f(x)=\frac{1}{\sigma\sqrt{2\pi}}
+  e^{\left(-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2\right)}
+  $}
+  \]
+
+%   \includegraphics[width=\linewidth]{}
+ \end{columns}
+
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=\textheight]{formula-normal-comic.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[width=\linewidth]{familia_normales.jpg}
+\end{frame}
+
+%\appendix
+%\AtNextBibliography{\footnotesize}
+%\begin{frame}[plain, allowframebreaks]{Bibliografía}{}
+% \bibitemsep 1em
+% \printbibliography[heading=none]
+%\end{frame}
+\end{document}

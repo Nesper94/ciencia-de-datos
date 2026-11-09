@@ -1,0 +1,323 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage[style=authoryear-icomp, backend=biber]{biblatex}
+\usepackage{lmodern} % Corrige el escalado de fuentes y símbolos
+\usetheme{jcar}
+
+%\includeonlyframes{a} % Para compilar solo en la que se está trabajando
+
+%\addbibresource{refs.bib}
+
+\begin{document}
+\author[Juan C. Arboleda Rivera]{Juan Camilo Arboleda Rivera}
+\title{Poblaciones y muestras}
+%\subtitle{}
+%\titlegraphic{\includegraphics[width=2cm]{udea}}
+\institute[U. de A.]{Instituto de Biología\\
+  Facultad de Ciencias Exactas y Naturales\\
+  Universidad de Antioquia\\
+  juan.arboleda2@udea.edu.co}
+\date{v: \today}
+%\subject{}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\begin{frame}
+ \frametitle{Contenidos}
+ \tableofcontents
+\end{frame}
+
+\section{Población y muestra}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+ Normalmente cuando tomamos datos, tenemos una muestra, no la población
+ completa
+ \\~\\
+ \includegraphics[height=.65\textheight]{población-muestra.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Diferencia entre Población y Muestra}{}
+ \centering
+ \includegraphics[height=.7\textheight]{Población_y_muestra.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Diferencia entre Población y Muestra}{}
+ \centering
+ Al tomar una muestra aleatoria hacemos una \textbf{estimación} de un valor
+ que queremos conocer, pero esta estimación estará influenciada por el azar.
+ \includegraphics[height=.75\textheight]{población-vs-muestra}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Parámetro vs. Estadístico}{}
+ \centering \Large
+
+ \begin{block}{Parámetro}
+  Medida numérica que describe una característica de una población completa
+ \end{block}
+
+ \vspace{1em}
+
+ \begin{block}{Estadístico}
+  Medida calculada a partir de los datos de una muestra
+ \end{block}
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Estimador}{}
+ \centering \Large
+
+ Un \textbf{estadístico} utilizado para aproximar un \textbf{parámetro} de
+ población se denomina \textbf{estimador} del parámetro
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[width=\linewidth]{estadístico-parámetro.jpeg}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+ Dos de los valores más importantes en estadística descriptiva son la
+ \textbf{media o promedio} y la \textbf{desviación estándar}.\\~\\
+ \includegraphics[height=.75\textheight]{Desviación_estándar.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+ La distinción entre Población y Muestra es muy importante en
+ estadística y Ciencia de datos\\~\\
+
+ Cuando se toma una \textbf{muestra} de una \textbf{población} y se calculan
+ la media de la muestra ($ \bar{x} $) y la desviación estándar de la muestra
+ ($ s $), estos valores se consideran \textbf{estimadores} de la media
+ poblacional ($ \mu $) y la desviación estándar poblacional ($ \sigma $)
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=\textheight]{población-muestra2.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Media o Promedio}{}
+ \centering
+ La \textbf{media muestral} se representa mediante $ \bar{x} $
+
+ \[ \scalebox{1.5}{$ \displaystyle
+ \bar{x} = \dfrac{\sum_{i=1}^{n} x_{i} }{n}
+ $}
+ \]
+
+ La \textbf{media poblacional} se representa mediante $ \mu $
+ {
+ \[ \scalebox{1.5}{$ \displaystyle
+ \mu = \dfrac{\sum_{i=1}^{N} x_{i} }{N}
+ $}
+ \]
+ }
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Desviación estándar}{}
+ \centering
+ \textbf{Desviación estándar muestral ($ s $):} Se usa cuando los datos
+ provienen de una muestra representativa de la población.\\
+ \vspace{-1em}
+
+ \[ s = \sqrt{\dfrac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n - 1}} \]
+
+ Donde $ x_{i} $ es cada valor, $ \bar{x} $ es la media de la muestra y $ n
+ $ es el número total de observaciones.
+
+ \pause
+
+ \textbf{Desviación estándar poblacional ($ \sigma $):} Se usa cuando se
+ cuenta con los datos de toda la población.\\
+ \vspace{-1em}
+
+ \[ \sigma = \sqrt{\dfrac{\sum_{i=1}^{N}(x_i - \mu)^2}{N}} \]
+
+ Donde $ x_{i} $ es cada valor, $ \mu $ es la media de la población y $ N $
+ es el tamaño total de la población.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejercicio}{}
+ \centering \Large
+ Calcular la desviación estándar de las siguientes variables en Python\\~\\
+ \begin{tabular}{|c|c|}
+ \hline
+ x & y \\
+ \hline
+ 7 & 2 \\
+ \hline
+ 5 & 20 \\
+ \hline
+ 5 & 15 \\
+ \hline
+ 6 & 7 \\
+ \hline
+ 8 & 9 \\
+ \hline
+ \end{tabular}
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\section{Estadística inferencial y Pruebas de hipótesis}
+
+\begin{frame}
+%[label=a]
+{¿Qué es la estadística inferencial?}{}
+ \centering \Large
+
+ La estadística inferencial es una rama de la estadística que se enfoca en
+ hacer conclusiones y generalizaciones sobre una población a partir de la
+ información obtenida de una muestra de la misma. Para hacer esta
+ inferencia, se aplican técnicas estadísticas como el cálculo de intervalos
+ de confianza o la realización de pruebas de hipótesis.
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Pruebas de hipótesis}{}
+ \centering \Large
+ Una prueba de hipótesis es un método estadístico que sirve para decidir si
+ una afirmación sobre una población es real o se debe al azar, basándose en
+ los datos de una muestra
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\section{El valor p}
+
+\begin{frame}
+%[label=a]
+{Pruebas de hipótesis}{}
+ \centering \Large
+ El fundamento de la mayoría de pruebas estadísticas usadas en ciencia está
+ en responder a la pregunta:\\~\\
+
+ Dado un supuesto (llamado \textbf{Hipótesis nula})\\
+ ¿Qué tan probable es obtener este resultado por azar?\\~\\
+
+ \pause
+
+ Esta probabilidad se denomina \textbf{valor p}
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ El \textbf{valor p} o \textbf{p-value} se puede interpretar como la
+ probabilidad de obtener un resultado por azar\\
+ \vspace{1em}
+ \includegraphics[width=\linewidth]{turtle-p-value.jpeg}
+ \blfootnote{Bispo, G. S. C. et al. Unveiling the secrets of leatherback
+ turtle (\textit{Dermochelys coriacea}) mating system: polygamy, polygyny,
+ and sex ratio dynamics of a Brazilian rookery. Biological Journal of the
+ Linnean Society 145, blaf026 (2025).
+ }
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejemplo: La migración de la polilla Bogong (\textit{Agrotis infusa})}{}
+ \centering
+ \includegraphics[width=\linewidth]{polillas-bogong.png}
+ \blfootnote{Dreyer, D. et al. Bogong moths use a stellar compass for
+ long-distance navigation at night. Nature 643, 994–1000 (2025).
+ }
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{\centering Test de Rayleigh}{}
+ \centering
+
+ \includegraphics[height=.75\textheight]{polar-histogram.png}\\
+
+ \begin{description}
+ \item[Hipótesis nula:] Los datos están distribuidos de manera completamente
+  uniforme alrededor de un círculo (no hay una dirección preferida)
+ \end{description}
+
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=\textheight]{migración-bogong.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Ejemplo}{}
+ \centering
+ Los colibrís Picoespada (\textit{Ensifera ensifera}) miden (sin contar su
+ pico) $ 13.5 \pm 0.3 $
+ cm$ ^{*} $\\
+
+ \vspace{.5em}
+ \begin{columns}
+  \column{.45\linewidth}
+   \includegraphics[height=.65\textheight]{Sword-billed_Hummingbird.jpg}
+  \column{.55\linewidth}
+   \includegraphics[height=.65\textheight]{distribution-ensifera-ensifera.png}
+ \end{columns}
+
+ \vfill
+ \scriptsize
+ $ ^{*} $La desviación estándar no ha sido reportada en ningún
+  artículo, fue inferida a partir del rango de tamaños reportado que es
+  entre
+  13 y 14 cm.
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+
+ Supongamos que esta especie tiene 20000 individuos\\~\\
+ Haremos simulaciones computacionales para ver cómo se comporta un muestreo
+ de esta población
+% \includegraphics[height=.85\textheight]{}
+\end{frame}
+
+%\appendix
+%\AtNextBibliography{\footnotesize}
+%\begin{frame}[plain, allowframebreaks]{Bibliografía}{}
+% \bibitemsep 1em
+% \printbibliography[heading=none]
+%\end{frame}
+\end{document}
