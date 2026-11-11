@@ -1,0 +1,408 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+\usepackage[style=authoryear-icomp, backend=biber]{biblatex}
+\usetheme{jcar}
+
+%\includeonlyframes{a} % Para compilar solo en la que se está trabajando
+
+%\addbibresource{refs.bib}
+
+\begin{document}
+\author[Juan C. Arboleda Rivera]{Juan Camilo Arboleda Rivera}
+\title{Bootstrap}
+%\subtitle{}
+%\titlegraphic{\includegraphics[width=2cm]{udea}}
+\institute[U. de A.]{Instituto de Biología\\
+  Facultad de Ciencias Exactas y Naturales\\
+  Universidad de Antioquia\\
+  juan.arboleda2@udea.edu.co}
+\date{v: \today}
+%\subject{}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\begin{frame}
+ \frametitle{Contenidos}
+ \tableofcontents
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Antes de comenzar...}{}
+ \centering
+ El bootstrap es una técnica muy usada en Biología\\
+ \includegraphics[height=.65\textheight]{Coulson_2006_gadine_phylogeny.jpg}\\
+ Por ejemplo, los números en esta filogenia son ``valores de bootstrap'',
+ luego explicaremos en qué consisten
+\end{frame}
+
+\section{Error estándar e intervalos de confianza}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+
+ \textbf{Error estándar}\\~\\
+
+ El \textbf{error estándar} (SE) es la desviación estándar de la
+ distribución muestral de un estadístico muestral, \textbf{por ejemplo} la
+ media\\~\\
+
+ Podemos hablar de error estándar de la desviación estándar, o el error
+ estándar de una proporción
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=.85\textheight]{población-muestras-tortugas.png}\\
+ A partir de cada muestra calculamos un estadístico, por ejemplo, la
+ proporción de hembras ($ P_h $).
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[width=\textwidth]{dist-muestral-proporción.jpg}\\
+ Calculamos el error estándar de estos valores, y con este error estándar
+ podemos construir un intervalo de confianza del 95\%:\\
+
+  $ IC_{95\%}= P_h \pm \approx 2 \times \text{Error estándar} $
+\end{frame}
+
+\begin{frame}
+% [label=a]
+ {}{}
+ \centering \large
+ Cuando calculábamos intervalos de confianza \textbf{para la media},
+ podíamos hallar el error estándar de la media gracias a que conocíamos la
+ ecuación
+
+ \[ SE_{\bar{x}} = \dfrac{s}{\sqrt{n}} \]
+
+ para un estadístico desconocido tendríamos que calcular la desviación
+ estándar de muchas muestras, pero...
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+ En la vida real...\\~\\
+ ...normalmente solo tenemos \textbf{una} muestra!\\~\\
+
+ \pause
+
+ ¿Cómo sabemos qué tanto varía un estadístico (por ejemplo la proporción de
+ hembras), si solo tenemos una muestra?\\~\\
+
+ \pause
+
+ {\LARGE ¡Bootstrap!}
+\end{frame}
+
+\section{Técnica de Bootstrap}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering \Large
+ \includegraphics[height=.85\textheight]{muestra-tortugas-por-sexo.png}\\
+ \vspace{-.5em}
+ $ \hat{P_h} = 0.7 $\\
+ ¿Cuál será el porcentaje ``real''?
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Creando una ``Población'' ficticia}{}
+ \centering \Large
+ Imaginemos que la ``Población'' está compuesta de muchas, muchas copias de
+ la muestra original...
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Muestreo con reemplazo}{}
+ \centering \Large
+ \begin{itemize}[<+->] \itemsep 1em
+ \item Para simular una distribución muestral, podemos simplemente tomar
+ repetidamente muestras aleatorias de esta ``Población'' hecha de muchas
+ copias de nuestra muestra
+
+ \item En la práctica no se pueden tener infinitas copias de la muestra...
+
+ \item ...pero podemos simular esto realizando un \emph{muestreo con
+ reemplazo} a partir de la muestra que tenemos (cada individuo puede ser
+ seleccionado más de una vez)
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Conceptos importantes}{}
+ \centering \large
+
+ \begin{block}{Muestra de bootstrap}
+  Muestra con reemplazo de la muestra original, usando el mismo tamaño
+  muestral
+ \end{block}
+
+ \includegraphics<1>[width=.9\linewidth]{bootstrap-sample.png}
+
+ \begin{block}<2->{Estadístico de bootstrap}
+  Es un estadístico calculado a partir de una muestra de bootstrap
+ \end{block}
+
+ \begin{block}<3>{Distribución de bootstrap}
+  Es la distribución de muchos estadísticos de bootstrap
+ \end{block}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[width=\linewidth]{bootstrap-dist.png}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \centering
+ \includegraphics[height=\textheight]{intro-bootstrap.jpeg}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Muestra de bootstrap}{}
+% \centering
+ \Large
+ Supongamos que la muestra original tiene los siguientes datos:
+ \[ 7, 8, 9, 42, 42 \]
+
+ ¿Puede la siguiente ser una muestra de bootstrap?
+ \only<1,2>{ \color{azul} \textbf{
+  \[ 9, 42, 8, 7, 11  \]
+  \pause[2]
+  No, porque $ 11 $ no es un valor presente en la muestra original
+ }}
+ \only<3,4>{ \color{azul} \textbf{
+  \[ 7, 8, 9, 42 \]
+  \pause[4]
+  No, porque una muestra de bootstrap debe tener el mismo tamaño que la
+  muestra original
+ }}
+ \only<5,6>{ \color{azul} \textbf{
+  \[ 9, 42, 8, 7, 9  \]
+  \pause[6]
+  Sí, porque pudo haber sido obtenida mediante muestreo con reemplazo de la
+  muestra original y es del mismo tamaño
+  }}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Muestra de bootstrap}{}
+ \Large
+ Tienes una muestra de tamaño $ n = 50 $. Haces un muestreo con reemplazo
+ 1000 veces para obtener 1000 muestras de bootstrap\\~\\
+
+ \only<1>{
+  ¿Cuál es el tamaño de muestra de cada muestra de bootstrap?\\~\\
+
+  A) 50\\
+  B) 1000
+ }
+ \only<2>{
+   ¿Cuántos estadísticos de bootstrap obtendrás?\\~\\
+
+   A) 50\\
+   B) 1000
+  }
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{¿De dónde viene el nombre Bootstrap?}{}
+ \centering
+ \begin{columns}
+  \column{.25\linewidth}
+   \includegraphics[width=\linewidth]{bootstraps1.jpg}
+  \column{.6\linewidth}
+   \includegraphics[width=\linewidth]{bootstraps2.jpg}
+ \end{columns}
+ \vspace{1em}
+ «Pull oneself up by one's own bootstraps»:\\Levantarse a sí mismo con las
+ orejas de las botas\\
+ Metáfora para llevar a cabo una tarea ``imposible'' sin ayuda externa
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{}{}
+ \footnotesize
+
+ {\centering
+ \includegraphics[height=.6\textheight]{bootstrap-phylogenetic-trees.png}\\}
+ \begin{enumerate}
+ \item Se alinean las secuencias homólogas de ADN de las especies estudiadas.
+
+ \item Se construyen conjuntos de datos Bootstrap mediante el muestreo
+ aleatorio con reemplazo de las columnas del alineamiento. Cada conjunto
+ conserva el mismo número de posiciones que el alineamiento original.
+
+ \item Se construye un árbol filogenético para cada conjunto.
+
+ \item Se comparan los árboles obtenidos y se calcula la frecuencia con la
+ que aparece cada agrupación de especies.
+ \end{enumerate}
+\end{frame}
+
+\begin{frame}
+% [label=a]
+ {}{}
+ \centering
+ \includegraphics[height=.9\textheight]{Coulson_2006_gadine_phylogeny.jpg}
+\end{frame}
+
+\section{Intervalos de confianza por bootstrap}
+
+\begin{frame}
+%[label=a]
+{Error estándar y distribución de bootstrap}{}
+ \centering \Large
+
+ \begin{itemize}[<+->] \itemsep 1em
+ \item La variabilidad de los estadísticos de bootstrap es similar a la
+ variabilidad de los estadísticos muestrales
+
+ \item ¡El \textbf{error estándar} de un estadístico puede ser estimado
+ usando la desviación estándar de la distribución de bootstrap!
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{La magia del bootstrapping}{}
+ \centering \Large
+
+ \begin{itemize} \itemsep 1em
+ \item Podemos usar bootstrapping para estimar la incertidumbre o error
+ estándar de muchos estadísticos muestrales
+
+ \item Si tenemos datos de una muestra, podemos usar bootstrapping para
+ crear un intervalo de confianza del 95\% para casi cualquier parámetro
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Intervalos de confianza mediante Bootstrap}{}
+ \centering \Large
+
+ \begin{description}
+ \item[Opción 1:] Estimar el error estándar del estadístico calculando la
+ desviación estándar de la distribución de bootstrap, y luego generar un
+ intervalo de confianza del 95\% calculando:
+
+ \[ IC_{95\%}= \text{estadístico} \pm 2 \cdot SE \]
+
+ \item[Opción 2:] Generar un intervalo de confianza del X\% como el rango
+ para los X\% valores centrales de los estadísticos de bootstrap
+ \end{description}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Método de los percentiles para intervalos de confianza}{}
+ \centering \large
+
+ \begin{itemize} \itemsep 1em
+ \item Para un intervalo de confianza del X\%, mantener los X\% valores
+ centrales de los estadísticos de bootstrap
+
+ \item Por ejemplo, para un intervalo de confianza del 99\%, mantener el
+ 99\% de los valores centrales, dejando 0.05\% en cada cola
+
+ \item El intervalo de confianza sería:\\
+ \[ IC_{99\%} = [\text{Percentil 0.05}, \text{Percentil 99.5}] \]\\
+ donde estos percentiles se refieren a la distribución de bootstrap
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Dos métodos}{}
+ \centering \Large
+
+ \begin{itemize} \itemsep 1em
+ \item Para una distribución de bootstrap simétrica, con forma de campana,
+ usar el método del error estándar o el método de los percentiles dará
+ intervalos de confianza del 95\% muy similares
+
+ \item Si la distribución de bootstrap no tiene forma de campana o si se
+ quiere un nivel de confianza diferente del 95\%, use el método de los
+ percentiles
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Criterios para construcción de Intervalos de Confianza mediante Bootstrap}{}
+ \Large
+
+ Usar el método del percentil para un intervalo de confianza mediante
+ bootstrap funciona para cualquier estadístico, siempre y cuando la
+ distribución de bootstrap sea:
+
+ \begin{itemize}
+  \item Aproximadamente continua
+ \end{itemize}
+
+ \vspace{1em}
+ Usar el método del error estándar requiere también que la distribución sea:
+
+ \begin{itemize}
+  \item Aproximadamente simétrica
+  \item Con forma de campana
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Número de muestras de bootstrap}{}
+ \centering \large
+
+ \begin{itemize} \itemsep 1em
+ \item Cuando se usa bootstrap, se puede obtener un intervalo de confianza
+ ligeramente diferente cada vez. Esto es normal.
+
+ \item Entre mayor cantidad de muestras de bootstrap se usen, más precisa
+ será la respuesta
+
+ \item En muchos casos de la vida real se usan 10.000 o hasta 100.000
+ muestras de bootstrap
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+%[label=a]
+{Resumen}{}
+ \centering \large
+
+ \begin{itemize} \itemsep 1em
+ \item El error estándar de un estadístico es la desviación estándar del
+ estadístico entre muchas muestras, el cual puede ser estimado a partir de
+ una distribución de bootstrap
+
+ \item Se pueden crear intervalos de confianza usando el error estándar o
+ los percentiles de una distribución de bootstrap
+ \end{itemize}
+\end{frame}
+
+\end{document}
